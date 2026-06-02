@@ -1,0 +1,28 @@
+/* pricing-table.css — the 4-column plan table (shared by index + homepage) */
+
+.cl-table {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid #e6e9ec; border-radius: 20px; background: #fff;
+  box-shadow: 0 1px 3px rgba(27,31,36,0.06); overflow: hidden;
+  font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #24292f;
+}
+.cl-col { padding: 34px 26px 40px; }
+.cl-plan-name { margin: 0; font-size: 27px; font-weight: 700; color: #24292f; letter-spacing: -0.01em; }
+.cl-plan-desc { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: #57606a; min-height: 44px; }
+.cl-price { margin-top: 24px; display: flex; align-items: flex-start; }
+.cl-price-amt { font-size: 46px; font-weight: 700; line-height: 1; color: #24292f; letter-spacing: -0.02em; }
+.cl-price-cur { font-size: 12px; font-weight: 600; color: #57606a; margin-left: 4px; top: -0.2em; }
+.cl-price-sub { margin: 12px 0 0; font-size: 14px; color: #57606a; }
+.cl-btn { width: 100%; margin-top: 22px; padding: 12px; border-radius: 8px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; border: 1px solid transparent; text-align: center; text-decoration: none; display: block; }
+.cl-btn-solid { background: #1f2328; color: #fff; border-color: #1f2328; }
+.cl-btn-solid:hover { background: #15181c; }
+.cl-btn-outline { background: #fff; color: #24292f; border-color: #d0d7de; }
+.cl-btn-outline:hover { background: #f6f8fa; }
+.cl-col-divider { border-top: 1px solid #ededf0; margin: 26px 0 18px; }
+.cl-included { display: flex; align-items: center; font-size: 15px; font-weight: 700; color: #24292f; margin-bottom: 16px; white-space: nowrap; }
+.cl-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+.cl-feature { display: flex; gap: 10px; align-items: flex-start; }
+.cl-fi-ic { flex-shrink: 0; margin-top: 2px; }
+.cl-feature-txt { font-size: 14.5px; line-height: 1.4; color: #424a53; }
+.cl-feature-off { color: #8a929c; }

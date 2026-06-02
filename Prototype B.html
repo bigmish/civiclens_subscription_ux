@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Civic Lens — Prototype B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="monitor.css" />
+<link rel="stylesheet" href="trial-treatments.css" />
+<link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="pricing-table.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body, #root { margin: 0; padding: 0; height: 100%; }
+  .cl { width: 100%; background: #fff; font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #24292f; -webkit-font-smoothing: antialiased; }
+  .cl-wrap { max-width: 1010px; margin: 0 auto; }
+  .cl-header { border-bottom: 1px solid #eef0f2; }
+  .cl-header-wrap { display: flex; align-items: center; justify-content: space-between; padding: 19px 0; }
+  .cl-logo { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; color: #24292f; white-space: nowrap; flex-shrink: 0; }
+  .cl-nav { display: flex; align-items: center; gap: 34px; }
+  .cl-nav-link { font-size: 15px; font-weight: 500; color: #424a53; text-decoration: none; }
+  .cl-nav-link:hover { color: #24292f; }
+  .cl-getstarted { font-family: inherit; font-size: 14px; font-weight: 600; color: #fff; background: #1f2328; border: 1px solid #1f2328; border-radius: 7px; padding: 9px 18px; cursor: pointer; box-shadow: 0 1px 2px rgba(27,31,36,0.05); margin-left: 6px; white-space: nowrap; }
+  .cl-hero { text-align: center; padding: 44px 0 0; }
+  .cl-h1 { margin: 0; font-size: 60px; font-weight: 700; line-height: 1.04; letter-spacing: -0.025em; color: #24292f; }
+  .cl-hero-sub { margin: 16px auto 0; max-width: 560px; font-size: 18px; line-height: 1.5; color: #57606a; }
+  .cl-free-slot { min-height: 110px; margin-top: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .cl-table-wrap { margin-top: var(--cl-gap, 16px); }
+  .cl-col { padding: 34px 26px 40px; }
+  .cl-plan-name { margin: 0; font-size: 27px; font-weight: 700; color: #24292f; letter-spacing: -0.01em; }
+  .cl-plan-desc { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: #57606a; min-height: 44px; }
+  .cl-price { margin-top: 24px; display: flex; align-items: flex-start; }
+  .cl-price-amt { font-size: 46px; font-weight: 700; line-height: 1; color: #24292f; letter-spacing: -0.02em; }
+  .cl-price-cur { font-size: 12px; font-weight: 600; color: #57606a; margin-left: 4px; top: -0.2em; }
+  .cl-price-sub { margin: 12px 0 0; font-size: 14px; color: #57606a; }
+  .cl-btn { width: 100%; margin-top: 22px; padding: 12px; border-radius: 8px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
+  .cl-btn-solid { background: #1f2328; color: #fff; border-color: #1f2328; }
+  .cl-btn-solid:hover { background: #15181c; }
+  .cl-btn-outline { background: #fff; color: #24292f; border-color: #d0d7de; }
+  .cl-btn-outline:hover { background: #f6f8fa; }
+  .cl-col-divider { border-top: 1px solid #ededf0; margin: 26px 0 18px; }
+  .cl-included { display: flex; align-items: center; font-size: 15px; font-weight: 700; color: #24292f; margin-bottom: 16px; white-space: nowrap; }
+  .cl-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+  .cl-feature { display: flex; gap: 10px; align-items: flex-start; }
+  .cl-fi-ic { flex-shrink: 0; margin-top: 2px; }
+  .cl-feature-txt { font-size: 14.5px; line-height: 1.4; color: #424a53; }
+  .cl-feature-off { color: #8a929c; }
+  .cl-elig { background: #f6f8fa; margin-top: 64px; padding: 78px 0; }
+  .cl-elig-inner { text-align: center; }
+  .cl-elig-h { margin: 0; font-size: 40px; font-weight: 700; color: #24292f; letter-spacing: -0.02em; }
+  .cl-elig-p { margin: 22px auto 0; max-width: 620px; font-size: 16px; line-height: 1.6; color: #57606a; }
+  .cl-footer { background: #fff; padding: 52px 0 0; }
+  .cl-footer-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cl-footer-dev { margin-top: 14px; font-size: 14px; color: #57606a; display: flex; align-items: center; }
+  .cl-footer-devlink { color: #24292f; font-weight: 600; text-decoration: none; }
+  .cl-footer-cols { display: flex; gap: 64px; }
+  .cl-footer-col { display: flex; flex-direction: column; gap: 12px; }
+  .cl-footer-col-h { font-size: 14px; font-weight: 700; color: #24292f; margin-bottom: 4px; }
+  .cl-footer-link { font-size: 14px; color: #57606a; text-decoration: none; display: inline-flex; align-items: center; }
+  .cl-footer-link:hover { color: #24292f; }
+  .cl-footer-bottom { margin-top: 46px; border-top: 1px solid #eef0f2; padding: 22px 0 30px; text-align: center; font-size: 13px; color: #57606a; }
+  .fcA { text-align: center; }
+  .fcA-big { font-size: 38px; font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; color: #0969da; }
+  .fcA-sub { margin-top: 8px; font-size: 19px; color: #57606a; }
+  .login-page { min-height: 100vh; display: flex; flex-direction: column; background: #fff; font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #24292f; }
+  .login-header { border-bottom: 1px solid #eef0f2; padding: 17px 32px; display: flex; align-items: center; }
+  .login-logo { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+  .login-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
+  .login-card { width: 100%; max-width: 400px; }
+  .login-h { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .login-sub { font-size: 15px; color: #57606a; margin: 0 0 28px; }
+  .login-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .login-label { font-size: 14px; font-weight: 600; color: #24292f; }
+  .login-input { font-family: inherit; font-size: 15px; color: #24292f; background: #fff; border: 1px solid #d0d7de; border-radius: 7px; padding: 10px 13px; outline: none; transition: border-color 0.15s; }
+  .login-input:focus { border-color: #0969da; box-shadow: 0 0 0 3px rgba(9,105,218,0.12); }
+  .login-forgot { font-size: 13px; color: #0969da; font-weight: 600; text-decoration: none; display: block; text-align: right; margin-top: -10px; margin-bottom: 20px; cursor: pointer; }
+  .login-btn { width: 100%; background: #1f2328; color: #fff; border: none; border-radius: 7px; padding: 12px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .login-btn:hover { background: #15181c; }
+  .login-divider { display: flex; align-items: center; gap: 12px; margin: 22px 0; color: #8a929c; font-size: 13px; }
+  .login-divider::before, .login-divider::after { content: ''; flex: 1; height: 1px; background: #e6e9ec; }
+  .login-create { width: 100%; background: #fff; color: #24292f; border: 1px solid #d0d7de; border-radius: 7px; padding: 12px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .login-create:hover { background: #f6f8fa; }
+  .login-footer { text-align: center; font-size: 12.5px; color: #8a929c; padding: 28px; }
+</style>
+</head>
+<body>
+<script src="auth.js"></script>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+const CL_PLANS=[{name:'Basic',desc:'For small newsrooms and research teams',price:'$100',sub:'per month / $1,000 per year',cta:'Subscribe',ctaStyle:'solid',features:[{t:'Everything in Free, plus:',ok:true},{t:'Full monitoring access',ok:true},{t:'Unlimited searches with filters',ok:true},{t:'Up to 5 team members',ok:true},{t:'1 hour onboarding',ok:true},{t:'No channel tracking credits',ok:false}]},{name:'Standard',desc:'For growing organizations and research institutions',price:'$500',sub:'per month / $5,000 per year',cta:'Subscribe',ctaStyle:'solid',features:[{t:'Everything in Basic, plus:',ok:true},{t:'500 channel tracking credits/year',ok:true},{t:'Access to 5 Public Actor Sets',ok:true},{t:'25 private Lists',ok:true},{t:'Unlimited SMS-based tiplines',ok:true},{t:'50 CSV exports per month',ok:true},{t:'Up to 10 team members',ok:true}]},{name:'Advanced',desc:'For large newsrooms and advanced research teams',price:'$1,000',sub:'per month / $10,000 per year',cta:'Subscribe',ctaStyle:'solid',features:[{t:'Everything in Standard, plus:',ok:true},{t:'1,000 channel tracking credits/year',ok:true},{t:'API rate limit of 500 requests/hour',ok:true},{t:'Access to 10 Public Actor Sets',ok:true},{t:'10 Projects with content labeling',ok:true},{t:'Create up to 5 Public Dashboards',ok:true},{t:'Up to 50 private Lists',ok:true},{t:'500 CSV exports per month',ok:true},{t:'Up to 25 team members',ok:true}]},{name:'Pro',desc:'For enterprise organizations and data-driven institutions',price:'$2,500',sub:'per month / $25,000 per year',cta:'Contact Sales',ctaStyle:'outline',features:[{t:'Everything in Advanced, plus:',ok:true},{t:'10,000 channel tracking credits/year',ok:true},{t:'API rate limit of 5,000 requests/hour',ok:true},{t:'Private Actor Sets and unlimited Public Actor Sets',ok:true},{t:'Unlimited Projects and Pipelines',ok:true},{t:'Unlimited Public and Private Dashboards',ok:true},{t:'Up to 100 private Lists',ok:true},{t:'Unlimited CSV exports',ok:true},{t:'Up to 50 team members',ok:true}]}];
+function ClCheck(){return<svg className="cl-fi-ic" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5 6.5 11.5 2.75 7.75" stroke="#2da44e" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
+function ClX(){return<svg className="cl-fi-ic" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="#8a929c" strokeWidth="1.7" strokeLinecap="round"/></svg>;}
+function ClChevronUp(){return<svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{marginRight:7}}><path d="M4 10l4-4 4 4" stroke="#24292f" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
+function ClChevronRight(){return<svg width="12" height="12" viewBox="0 0 16 16" fill="none" style={{marginLeft:5,opacity:0.55}}><path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;}
+function ClPlanColumn({plan,idx,onSubscribe}){return<div className="cl-col" style={{borderLeft:idx===0?'none':'1px solid #ededf0'}}><h3 className="cl-plan-name">{plan.name}</h3><p className="cl-plan-desc">{plan.desc}</p><div className="cl-price"><span className="cl-price-amt">{plan.price}</span><sup className="cl-price-cur">USD</sup></div><p className="cl-price-sub">{plan.sub}</p>{plan.ctaStyle==='solid'?<button className="cl-btn cl-btn-solid" onClick={()=>onSubscribe&&onSubscribe(plan.name)}>{plan.cta}</button>:<button className="cl-btn cl-btn-outline">{plan.cta}</button>}<div className="cl-col-divider"></div><div className="cl-included"><ClChevronUp/>What's included</div><ul className="cl-features">{plan.features.map((f,i)=><li className="cl-feature" key={i}>{f.ok?<ClCheck/>:<ClX/>}<span className={f.ok?'cl-feature-txt':'cl-feature-txt cl-feature-off'}>{f.t}</span></li>)}</ul></div>;}
+function PricingPage({freeCallout,onSubscribe,onGetStarted}){return<div className="cl"><header className="cl-header"><div className="cl-wrap cl-header-wrap"><div className="cl-logo">Civic Lens</div><nav className="cl-nav"><a className="cl-nav-link" href="#">Features</a><a className="cl-nav-link" href="#">Pricing</a><a className="cl-nav-link" href="#">FAQ</a><a className="cl-nav-link" href="#">Dashboard</a>{onGetStarted?<button className="cl-getstarted" onClick={onGetStarted}>Get Started</button>:<a className="cl-getstarted" href="#" style={{textDecoration:'none',display:'inline-block'}}>Get Started</a>}</nav></div></header><section className="cl-hero"><h1 className="cl-h1">Choose your plan</h1><p className="cl-hero-sub">From individual researchers to enterprise teams, we have a plan that fits your needs.</p></section>{freeCallout&&<div className="cl-wrap cl-free-slot">{freeCallout}</div>}<section className="cl-wrap cl-table-wrap"><div className="cl-table">{CL_PLANS.map((plan,i)=><ClPlanColumn plan={plan} idx={i} key={plan.name} onSubscribe={onSubscribe}/>)}</div></section><section className="cl-elig"><div className="cl-wrap cl-elig-inner"><h2 className="cl-elig-h">Eligibility</h2><p className="cl-elig-p">Civic Lens is available to journalists, researchers, academics, civil society organizations, and other professionals working to understand and combat misinformation.</p></div></section><footer className="cl-footer"><div className="cl-wrap cl-footer-top"><div><div className="cl-logo">Civic Lens</div><div className="cl-footer-dev">Developed by the <a className="cl-footer-devlink" href="#">Algorithmic Transparency Institute</a><ClChevronRight/></div></div><div className="cl-footer-cols"><div className="cl-footer-col"><div className="cl-footer-col-h">Product</div><a className="cl-footer-link" href="#">Features<ClChevronRight/></a><a className="cl-footer-link" href="#">Pricing<ClChevronRight/></a></div><div className="cl-footer-col"><div className="cl-footer-col-h">Company</div><a className="cl-footer-link" href="#">About ATI<ClChevronRight/></a></div><div className="cl-footer-col"><div className="cl-footer-col-h">Legal</div><a className="cl-footer-link" href="#">Privacy Policy<ClChevronRight/></a></div></div></div><div className="cl-footer-bottom"><div className="cl-wrap">© 2026 Algorithmic Transparency Institute. All rights reserved.</div></div></footer></div>;}
+</script>
+
+<script type="text/babel">
+const MA_POSTS=[{name:'The Young Turks',followers:'5.8M followers',ago:'5 days ago',platform:'youtube',text:"They're doing it again. Another policy that will destroy American families while elites profit.",eng:{views:'470.7K',likes:'36.2K',shares:'1.6K',comments:'1.9K'}},{name:'Breitbart News',followers:'4.5M followers',ago:'5 days ago',platform:'facebook',text:'Deep state operatives have been caught coordinating with media to suppress this story.',eng:{views:'1M',likes:'27.8K',shares:'9.5K',comments:'3.3K'}},{name:'Marjorie Taylor Greene',followers:'3.8M followers',ago:'6 days ago',platform:'twitter',text:'The mainstream narrative is collapsing as more evidence comes to light. Share widely.',eng:{views:'953.2K',likes:'32.9K',shares:'3.7K',comments:'1.1K'}},{name:'Russell Brand',followers:'6.7M followers',ago:'6 days ago',platform:'youtube',text:"Fact: The data on this has been manipulated. Here's the original unedited version.",video:true,eng:{views:'1.4M',likes:'42.3K',shares:'7.1K',comments:'7.6K'}}];
+const MAi={chevron:(d)=><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d={d==='up'?'M4 10l4-4 4 4':'M4 6l4 4 4-4'} stroke="#57606a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,monitor:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2.5" width="13" height="9" rx="1.4" stroke={c} strokeWidth="1.3"/><path d="M6 14h4M8 11.5V14" stroke={c} strokeWidth="1.3" strokeLinecap="round"/></svg>,list:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.5 4h8M5.5 8h8M5.5 12h8" stroke={c} strokeWidth="1.4" strokeLinecap="round"/><circle cx="2.5" cy="4" r="1" fill={c}/><circle cx="2.5" cy="8" r="1" fill={c}/><circle cx="2.5" cy="12" r="1" fill={c}/></svg>,antenna:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="1.4" fill={c}/><path d="M5 9a4 4 0 0 1 0-6M11 3a4 4 0 0 1 0 6M8 7.3l-1.4 6.2h2.8L8 7.3z" stroke={c} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>,tag:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 2.5h5l6 6-5 5-6-6v-5z" stroke={c} strokeWidth="1.3" strokeLinejoin="round"/><circle cx="5.2" cy="5.2" r="1" fill={c}/></svg>,people:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5.5" r="2.2" stroke={c} strokeWidth="1.3"/><path d="M2.5 13c0-2 1.6-3.3 3.5-3.3S9.5 11 9.5 13" stroke={c} strokeWidth="1.3" strokeLinecap="round"/><path d="M10.5 4.2A2 2 0 0 1 12 7.7M11.2 9.9c1.5.2 2.6 1.4 2.6 3.1" stroke={c} strokeWidth="1.3" strokeLinecap="round"/></svg>,eye:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z" stroke={c} strokeWidth="1.3"/><circle cx="8" cy="8" r="1.8" stroke={c} strokeWidth="1.3"/></svg>,gear:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.1" stroke={c} strokeWidth="1.3"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" stroke={c} strokeWidth="1.2" strokeLinecap="round"/></svg>,building:(c)=><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="2" width="7" height="12" rx="0.6" stroke={c} strokeWidth="1.3"/><path d="M9.5 6h4v8h-4" stroke={c} strokeWidth="1.3"/><path d="M4.5 4.5h1M6.5 4.5h1M4.5 7h1M6.5 7h1M4.5 9.5h1M6.5 9.5h1M11 8.5h1M11 11h1" stroke={c} strokeWidth="1.1" strokeLinecap="round"/></svg>,aperture:(c)=><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke={c} strokeWidth="1.3"/><path d="M8 2.2 5 7.3M13.5 6.2 7.6 6.6M11 13.6 8.5 8.3M2.5 9.8l5.9-.4M4.9 2.4 8 7.7" stroke={c} strokeWidth="1.1" strokeLinecap="round"/></svg>,help:(c)=><svg width="17" height="17" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.3" stroke={c} strokeWidth="1.3"/><path d="M6.3 6.2a1.8 1.8 0 0 1 3.5.5c0 1.2-1.3 1.4-1.3 2.4" stroke={c} strokeWidth="1.3" strokeLinecap="round"/><circle cx="8.4" cy="11.3" r="0.8" fill={c}/></svg>,funnel:(c)=><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 3.5h12l-4.6 5.3V13L6.6 11.7V8.8L2 3.5z" stroke={c} strokeWidth="1.3" strokeLinejoin="round"/></svg>,cal:(c)=><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.4" stroke={c} strokeWidth="1.3"/><path d="M2 6h12M5 1.6v2.4M11 1.6v2.4" stroke={c} strokeWidth="1.3" strokeLinecap="round"/></svg>,engEye:(c)=><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M1.5 8S4 3.8 8 3.8 14.5 8 14.5 8 12 12.2 8 12.2 1.5 8 1.5 8z" stroke={c} strokeWidth="1.2"/><circle cx="8" cy="8" r="1.7" stroke={c} strokeWidth="1.2"/></svg>,heart:(c)=><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13.2S2 9.8 2 5.9A2.9 2.9 0 0 1 8 4.6 2.9 2.9 0 0 1 14 5.9c0 3.9-6 7.3-6 7.3z" stroke={c} strokeWidth="1.2" strokeLinejoin="round"/></svg>,share:(c)=><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="4" cy="8" r="2" stroke={c} strokeWidth="1.2"/><circle cx="12" cy="3.5" r="2" stroke={c} strokeWidth="1.2"/><circle cx="12" cy="12.5" r="2" stroke={c} strokeWidth="1.2"/><path d="M5.8 7l4.4-2.4M5.8 9l4.4 2.4" stroke={c} strokeWidth="1.2"/></svg>,comment:(c)=><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 3.5h12v8H6l-3 2.3V11.5H2v-8z" stroke={c} strokeWidth="1.2" strokeLinejoin="round"/></svg>};
+function MAPlatform({p}){if(p==='youtube')return<span className="ma-plat" style={{background:'#ff0000'}}><span style={{width:0,height:0,borderTop:'4px solid transparent',borderBottom:'4px solid transparent',borderLeft:'7px solid #fff',marginLeft:1}}></span></span>;if(p==='facebook')return<span className="ma-plat" style={{background:'#1877f2',fontFamily:'Georgia,serif',fontWeight:700,fontSize:13}}>f</span>;return<span className="ma-plat" style={{background:'#000',fontWeight:700,fontSize:11,fontFamily:'Arial'}}>𝕏</span>;}
+function MANavItem({icon,label,active,chevron}){const c=active?'#0550ae':'#57606a';return<div className={active?'ma-nav-item ma-nav-active':'ma-nav-item'}><span className="ma-nav-ic">{icon(c)}</span><span className="ma-nav-label">{label}</span>{chevron&&<span className="ma-nav-chev">{MAi.chevron(chevron)}</span>}</div>;}
+function MAPostCard({post}){const g='#57606a';return<div className="ma-card"><div className="ma-card-head"><div className="ma-avatar"></div><div className="ma-card-id"><div className="ma-card-name">{post.name}</div><div className="ma-card-meta">{post.followers}</div><div className="ma-card-meta">{post.ago}</div></div><div className="ma-card-actions"><span className="ma-dots">···</span><MAPlatform p={post.platform}/></div></div><div className="ma-card-divider"></div><div className="ma-card-body"><p className="ma-card-text">{post.text}</p>{post.video&&<div className="ma-video"><span className="ma-video-ph">video thumbnail</span><span className="ma-play"><span className="ma-play-tri"></span></span></div>}</div><div className="ma-card-eng"><span className="ma-eng">{MAi.engEye(g)} {post.eng.views}</span><span className="ma-eng">{MAi.heart(g)} {post.eng.likes}</span><span className="ma-eng">{MAi.share(g)} {post.eng.shares}</span><span className="ma-eng">{MAi.comment(g)} {post.eng.comments}</span></div></div>;}
+function MonitorApp({topBanner,sidebarCard,overlay,orgName='Acme Newsroom'}){return<div className="ma-app"><div className="ma-accentline"></div><div className="ma-topbar"><div className="ma-org"><span className="ma-org-ic">{MAi.aperture('#24292f')}</span><span className="ma-org-name">{orgName}</span><span className="ma-org-sep">/ All Projects</span><span className="ma-org-section">Monitoring</span></div><div className="ma-topright"><span className="ma-icon-btn">{MAi.help('#57606a')}</span><span className="ma-user"></span></div></div><div className="ma-body"><aside className="ma-sidebar"><div className="ma-nav-group"><MANavItem icon={MAi.monitor} label="Monitor" chevron="up"/><div className="ma-nav-children"><MANavItem icon={MAi.list} label="Posts" active/><MANavItem icon={MAi.antenna} label="Channels"/><MANavItem icon={MAi.tag} label="Search Terms"/><MANavItem icon={MAi.people} label="Actors"/><MANavItem icon={MAi.list} label="Lists"/></div></div><MANavItem icon={MAi.eye} label="Investigate" chevron="down"/><MANavItem icon={MAi.gear} label="Manage" chevron="down"/><MANavItem icon={MAi.building} label="Organization Settings" chevron="down"/>{sidebarCard}</aside><main className="ma-main">{topBanner}<div className="ma-toolbar"><div className="ma-search">Search posts by keyword…</div><div className="ma-filters">{MAi.funnel('#57606a')} Filters <span className="ma-caret">▾</span></div><div className="ma-toolbar-right"><div className="ma-datebtn">{MAi.cal('#57606a')} Last 7 days</div><div className="ma-seg"><span className="ma-seg-btn ma-seg-active">▦</span><span className="ma-seg-btn">📈</span><span className="ma-seg-btn">🏷</span></div></div></div><div className="ma-totals"><div className="ma-totals-l">Total Posts: <span className="ma-badge">4</span></div><div className="ma-sort">Sort: Newest ↓ <span className="ma-caret">▾</span></div></div><div className="ma-scroll"><div className="ma-grid">{MA_POSTS.map((p,i)=><MAPostCard post={p} key={i}/>)}</div><div className="ma-nomore">No more posts to load</div></div></main></div>{overlay}</div>;}
+</script>
+
+<script type="text/babel">
+const Arrow=()=><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+const SatelliteGlyph=<svg width="96" height="96" viewBox="0 0 96 96" fill="none" style={{opacity:0.95}}><ellipse cx="40" cy="55" rx="26" ry="13" transform="rotate(-40 40 55)" stroke="#fff" strokeWidth="3.6"/><path d="M40 55 56 39" stroke="#fff" strokeWidth="3.2" strokeLinecap="round"/><circle cx="58" cy="37" r="4" fill="#fff"/><path d="M33 61 28 82M47 67 41 82M23 82h24" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/><path d="M64 33a15 15 0 0 1 5 11" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.9"/><path d="M69 23a27 27 0 0 1 9 20" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.68"/></svg>;
+const SearchGlyph=<svg width="88" height="88" viewBox="0 0 88 88" fill="none"><circle cx="38" cy="38" r="22" stroke="#fff" strokeWidth="4.5"/><path d="M54 54 70 70" stroke="#fff" strokeWidth="5" strokeLinecap="round"/><path d="M30 38h16M38 30v16" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" opacity="0.85"/></svg>;
+const PeopleGlyph=<svg width="100" height="92" viewBox="0 0 100 92" fill="none"><circle cx="38" cy="34" r="13" stroke="#fff" strokeWidth="4"/><path d="M18 70c0-12 9-20 20-20s20 8 20 20" stroke="#fff" strokeWidth="4" strokeLinecap="round"/><circle cx="68" cy="38" r="10" stroke="#fff" strokeWidth="4" opacity="0.85"/><path d="M62 68c0-9 5-16 12-16s12 6 12 15" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity="0.85"/></svg>;
+function FAQItem({q,a}){return<details className="hp-faq-item"><summary className="hp-faq-q">{q}<span className="hp-faq-plus">+</span></summary><p className="hp-faq-a">{a}</p></details>;}
+function HomePage({onGetStarted,onSubscribe}={}){
+  const goPlans=onGetStarted||(()=>{location.href='index.html';});
+  const doSubscribe=onSubscribe||((name)=>{location.href='index.html';});
+  return<div className="hp"><header className="hp-header"><div className="hp-wrap hp-header-in"><div className="hp-logo">Civic Lens</div><nav className="hp-nav"><a className="hp-nav-link" href="#features">Features</a><a className="hp-nav-link" href="#pricing">Pricing</a><a className="hp-nav-link" href="#faq">FAQ</a><a className="hp-nav-link" href="#">Sign In</a><button className="hp-btn-dark" onClick={goPlans}>Get Started</button></nav></div></header><section className="hp-wrap hp-hero"><span className="hp-badge">Social Media Intelligence Platform</span><h1 className="hp-h1">Decode what really matters across social media</h1><p className="hp-hero-p">Developed by the Algorithmic Transparency Institute for journalists, researchers, and change makers.</p><div className="hp-hero-cta"><button className="hp-btn-dark" onClick={goPlans}>Get Started Free</button><a className="hp-btn-outline" href="#features">Explore Features</a></div></section><section id="features" className="hp-wrap hp-features-section"><div className="hp-feature"><div className="hp-feature-text"><h2 className="hp-feature-h">Monitor Social Media at Scale</h2><p className="hp-feature-p">Track over 250,000+ channels across Facebook, Twitter/X, YouTube, Instagram, Telegram, and more.</p><a className="hp-feature-link" href="#" onClick={e=>{e.preventDefault();goPlans();}}>Start monitoring <Arrow/></a></div><div className="hp-feature-panel"><div className="hp-panel hp-panel-monitor">{SatelliteGlyph}</div></div></div><div className="hp-feature rev"><div className="hp-feature-text"><h2 className="hp-feature-h">Powerful Research Tools</h2><p className="hp-feature-p">Advanced boolean search with granular filters for platform, date range, and engagement metrics.</p><a className="hp-feature-link" href="#" onClick={e=>{e.preventDefault();goPlans();}}>Explore search <Arrow/></a></div><div className="hp-feature-panel"><div className="hp-panel hp-panel-research">{SearchGlyph}</div></div></div><div className="hp-feature"><div className="hp-feature-text"><h2 className="hp-feature-h">Collaborate with Your Team</h2><p className="hp-feature-p">Create and share custom lists, work with team members on investigations.</p><a className="hp-feature-link" href="#" onClick={e=>{e.preventDefault();goPlans();}}>See collaboration tools <Arrow/></a></div><div className="hp-feature-panel"><div className="hp-panel hp-panel-collab">{PeopleGlyph}</div></div></div></section><section id="pricing" className="hp-pricing"><div className="hp-wrap"><h2 className="hp-section-h">Choose your plan</h2><p className="hp-section-sub">From individual researchers to enterprise teams, we have a plan that fits your needs.</p><div className="cl-table">{CL_PLANS.map((plan,i)=><ClPlanColumn plan={plan} idx={i} key={plan.name} onSubscribe={doSubscribe}/>)}</div></div></section><section id="faq" className="hp-faq"><div className="hp-wrap"><h2 className="hp-section-h">Frequently asked questions</h2><div className="hp-faq-list"><FAQItem q="Is there a free tier?" a="Every paid plan starts with a free 14-day trial — full access to every feature, with no credit card required up front."/></div></div></section><section className="hp-wrap hp-cta-section"><div className="hp-cta-card"><div className="hp-cta-glow"></div><h2 className="hp-cta-h">Ready to start your research?</h2><p className="hp-cta-p">Join thousands of researchers, journalists, and analysts using Civic Lens.</p><div className="hp-cta-btns"><button className="hp-btn-dark" onClick={goPlans}>Get Started Free</button></div></div></section><footer className="hp-footer"><div className="hp-wrap"><div className="hp-footer-top"><div><div className="hp-logo">Civic Lens</div><div className="hp-footer-dev">Developed by the <a className="hp-footer-devlink" href="#">Algorithmic Transparency Institute</a></div></div></div><div className="hp-footer-bottom">© 2026 Algorithmic Transparency Institute. All rights reserved.</div></div></footer></div>;}
+</script>
+
+<script type="text/babel">
+// ── Prototype B flow ──────────────────────────────────────────────
+const { useState } = React;
+const FreeCallout = <div className="fcA"><div className="fcA-big">Free for 14 days</div><div className="fcA-sub">Full features, no credit card needed up front</div></div>;
+const CheckBlue = <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 6.5 9.5 17 4.5 12" stroke="#0969da" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+
+function LoginScreen({ onSignIn, onBack }) {
+  return (
+    <div className="login-page">
+      <header className="login-header"><span className="login-logo" style={{ cursor: 'pointer' }} onClick={onBack}>Civic Lens</span></header>
+      <div className="login-body"><div className="login-card">
+        <h1 className="login-h">Sign in to Civic Lens</h1>
+        <p className="login-sub">Access your monitoring dashboard.</p>
+        <div className="login-field"><label className="login-label">Email address</label><input className="login-input" type="email" placeholder="you@organisation.org" /></div>
+        <div className="login-field"><label className="login-label">Password</label><input className="login-input" type="password" placeholder="••••••••" /></div>
+        <a className="login-forgot">Forgot password?</a>
+        <button className="login-btn" onClick={onSignIn}>Sign in</button>
+        <div className="login-divider">or</div>
+        <button className="login-create">Create a new account</button>
+      </div></div>
+      <div className="login-footer">© 2026 Algorithmic Transparency Institute</div>
+    </div>
+  );
+}
+
+function Prototype() {
+  const [screen, setScreen] = useState('home');
+  const [plan, setPlan] = useState('Advanced');
+  const [showModal, setShowModal] = useState(true);
+  const [showSubscribeModal, setShowSubscribeModal] = useState(false);
+
+  const goConfirmation = (name) => { setPlan(name); setShowModal(true); setScreen('monitoring_membership_confirmation'); };
+
+  if (screen === 'home') return <HomePage onGetStarted={() => setScreen('login')} onSubscribe={goConfirmation} />;
+  if (screen === 'login') return <LoginScreen onSignIn={() => setScreen('pricing')} onBack={() => setScreen('home')} />;
+
+  if (screen === 'monitoring_membership_confirmation') return (
+    <MonitorApp
+      sidebarCard={<div className="mc t1"><div className="mc-plan">{plan} plan</div><div className="mc-cap">Free trial · <b>14 days left</b></div><button className="mc-btn-dark" onClick={() => setScreen('membership_no_free')}>Subscribe</button></div>}
+      overlay={showModal ? (
+        <div className="tw-overlay"><div className="tw-dim"></div><div className="tw-modal">
+          <div className="tw-badge">{CheckBlue}</div>
+          <div className="tw-eyebrow">{plan.toUpperCase()} PLAN · FREE TRIAL</div>
+          <h2>You're all set — welcome to Civic Lens</h2>
+          <p>You're trying the <b>{plan} plan</b> free — full access to every feature, with no payment required. Your trial runs for 14 days and ends on <b>June 16, 2026</b>.</p>
+          <div className="tw-meter"><div className="tw-meter-row"><span>Day 1 of 14</span><span>14 days left</span></div><div className="tw-meter-bar"><div className="tw-meter-fill" style={{ width: '7%' }}></div></div></div>
+          <div className="tw-actions"><button className="tw-btn-primary" onClick={() => setShowModal(false)}>Start exploring</button><a className="tw-link" onClick={() => setScreen('membership_no_free')}>See plans &amp; pricing</a></div>
+          <div className="tw-foot">We'll remind you before your trial ends. No charge until you choose a plan.</div>
+        </div></div>
+      ) : null}
+    />
+  );
+
+  if (screen === 'membership_no_free') return (
+    <PricingPage
+      onSubscribe={(name) => { setPlan(name); setShowSubscribeModal(true); setScreen('monitoring_subscribed'); }}
+      onGetStarted={() => { setShowSubscribeModal(true); setScreen('monitoring_subscribed'); }}
+    />
+  );
+
+  if (screen === 'monitoring_subscribed') return (
+    <MonitorApp overlay={showSubscribeModal ? (
+      <div className="tw-overlay"><div className="tw-dim"></div><div className="tw-modal">
+        <div className="tw-badge" style={{ background: '#dafbe1' }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 6.5 9.5 17 4.5 12" stroke="#1a7f37" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+        <div className="tw-eyebrow">{plan.toUpperCase()} PLAN · SUBSCRIPTION CONFIRMED</div>
+        <h2>You're now subscribed to {plan}</h2>
+        <p>Your <b>{plan} plan</b> is now active. You have full access to every {plan} feature starting today.</p>
+        <div className="tw-actions"><button className="tw-btn-primary" onClick={() => setShowSubscribeModal(false)}>Go to dashboard</button></div>
+        <div className="tw-foot">You'll be billed on the 2nd of each month. Manage your subscription in Account Settings.</div>
+      </div></div>
+    ) : null} />
+  );
+
+  return <PricingPage freeCallout={FreeCallout} onSubscribe={goConfirmation} onGetStarted={() => window.scrollTo(0, 0)} />;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Prototype />);
+</script>
+</body>
+</html>

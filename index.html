@@ -3,895 +3,170 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Civic Lens — Prototype A</title>
+<title>Three Flow Variants for Subscription — Civic Lens</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-*, *::before, *::after { box-sizing: border-box; }
-html, body, #root { margin: 0; padding: 0; height: 100%; }
+  *, *::before, *::after { box-sizing: border-box; }
 
-/* ── Pricing page ── */
-.cl { width: 100%; background: #fff; font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #24292f; -webkit-font-smoothing: antialiased; }
-.cl-wrap { max-width: 1010px; margin: 0 auto; padding: 0 24px; }
-.cl-header { border-bottom: 1px solid #eef0f2; }
-.cl-header-wrap { display: flex; align-items: center; justify-content: space-between; padding: 19px 0; }
-.cl-logo { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; color: #24292f; white-space: nowrap; flex-shrink: 0; }
-.cl-nav { display: flex; align-items: center; gap: 34px; }
-.cl-nav-link { font-size: 15px; font-weight: 500; color: #424a53; text-decoration: none; }
-.cl-nav-link:hover { color: #24292f; }
-.cl-getstarted { font-family: inherit; font-size: 14px; font-weight: 600; color: #fff; background: #1f2328; border: 1px solid #1f2328; border-radius: 7px; padding: 9px 18px; cursor: pointer; box-shadow: 0 1px 2px rgba(27,31,36,.05); margin-left: 6px; white-space: nowrap; }
-.cl-hero { text-align: center; padding: 66px 0 0; }
-.cl-h1 { margin: 0; font-size: 60px; font-weight: 700; line-height: 1.04; letter-spacing: -.025em; color: #24292f; }
-.cl-hero-sub { margin: 26px auto 0; max-width: 560px; font-size: 18px; line-height: 1.5; color: #57606a; }
-.cl-free-slot { min-height: 150px; margin-top: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.cl-table-wrap { margin-top: 24px; }
-.cl-table { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid #e6e9ec; border-radius: 20px; background: #fff; box-shadow: 0 1px 3px rgba(27,31,36,.06); overflow: hidden; font-family: 'Hind', -apple-system, sans-serif; color: #24292f; }
-.cl-col { padding: 34px 26px 40px; }
-.cl-plan-name { margin: 0; font-size: 27px; font-weight: 700; color: #24292f; letter-spacing: -.01em; }
-.cl-plan-desc { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: #57606a; min-height: 44px; }
-.cl-price { margin-top: 24px; display: flex; align-items: flex-start; }
-.cl-price-amt { font-size: 46px; font-weight: 700; line-height: 1; color: #24292f; letter-spacing: -.02em; }
-.cl-price-cur { font-size: 12px; font-weight: 600; color: #57606a; margin-left: 4px; top: -.2em; }
-.cl-price-sub { margin: 12px 0 0; font-size: 14px; color: #57606a; }
-.cl-btn { width: 100%; margin-top: 22px; padding: 12px; border-radius: 8px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; border: 1px solid transparent; text-align: center; text-decoration: none; display: block; }
-.cl-btn-solid { background: #1f2328; color: #fff; border-color: #1f2328; }
-.cl-btn-solid:hover { background: #15181c; }
-.cl-btn-outline { background: #fff; color: #24292f; border-color: #d0d7de; }
-.cl-btn-outline:hover { background: #f6f8fa; }
-.cl-col-divider { border-top: 1px solid #ededf0; margin: 26px 0 18px; }
-.cl-included { display: flex; align-items: center; font-size: 15px; font-weight: 700; color: #24292f; margin-bottom: 16px; white-space: nowrap; }
-.cl-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
-.cl-feature { display: flex; gap: 10px; align-items: flex-start; }
-.cl-fi-ic { flex-shrink: 0; margin-top: 2px; }
-.cl-feature-txt { font-size: 14.5px; line-height: 1.4; color: #424a53; }
-.cl-feature-off { color: #8a929c; }
-.cl-elig { background: #f6f8fa; margin-top: 64px; padding: 78px 0; }
-.cl-elig-inner { text-align: center; }
-.cl-elig-h { margin: 0; font-size: 40px; font-weight: 700; color: #24292f; letter-spacing: -.02em; }
-.cl-elig-p { margin: 22px auto 0; max-width: 620px; font-size: 16px; line-height: 1.6; color: #57606a; }
-.cl-footer { background: #fff; padding: 52px 0 0; }
-.cl-footer-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.cl-footer-dev { margin-top: 14px; font-size: 14px; color: #57606a; display: flex; align-items: center; }
-.cl-footer-devlink { color: #24292f; font-weight: 600; text-decoration: none; }
-.cl-footer-cols { display: flex; gap: 64px; }
-.cl-footer-col { display: flex; flex-direction: column; gap: 12px; }
-.cl-footer-col-h { font-size: 14px; font-weight: 700; color: #24292f; margin-bottom: 4px; }
-.cl-footer-link { font-size: 14px; color: #57606a; text-decoration: none; display: inline-flex; align-items: center; }
-.cl-footer-link:hover { color: #24292f; }
-.cl-footer-bottom { margin-top: 46px; border-top: 1px solid #eef0f2; padding: 22px 0 30px; text-align: center; font-size: 13px; color: #57606a; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* Free callout A */
-.fcA { text-align: center; }
-.fcA-big { font-size: 38px; font-weight: 700; line-height: 1.08; letter-spacing: -.02em; color: #0969da; }
-.fcA-sub { margin-top: 8px; font-size: 19px; color: #57606a; }
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 32px 120px;
+  }
 
-/* ── Monitor app ── */
-.ma-app { width: 100%; height: 100%; position: relative; background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #24292f; display: flex; flex-direction: column; font-size: 14px; overflow: hidden; min-height: 100vh; }
-.ma-accentline { height: 3px; background: #0969da; flex-shrink: 0; }
-.ma-topbar { height: 46px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #e6e9ec; }
-.ma-org { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
-.ma-org-ic { display: flex; }
-.ma-org-name { color: #24292f; }
-.ma-org-sep { color: #57606a; }
-.ma-org-section { color: #24292f; margin-left: 6px; }
-.ma-topright { display: flex; align-items: center; gap: 14px; }
-.ma-icon-btn { display: flex; cursor: pointer; }
-.ma-user { width: 26px; height: 26px; border-radius: 50%; background: #e6e9ec; border: 1px solid #d0d7de; display: inline-block; }
-.ma-body { flex: 1; display: flex; min-height: 0; }
-.ma-sidebar { width: 188px; flex-shrink: 0; border-right: 1px solid #e6e9ec; padding: 10px 8px; display: flex; flex-direction: column; gap: 1px; }
-.ma-nav-group { display: flex; flex-direction: column; gap: 1px; }
-.ma-nav-children { display: flex; flex-direction: column; gap: 1px; }
-.ma-nav-item { display: flex; align-items: center; gap: 9px; padding: 6px 8px; border-radius: 6px; font-size: 14px; color: #57606a; cursor: pointer; position: relative; }
-.ma-nav-item:hover { background: #f3f4f6; }
-.ma-nav-children .ma-nav-item { padding-left: 18px; }
-.ma-nav-active { background: #ddeeff; color: #0550ae; font-weight: 500; }
-.ma-nav-active::before { content: ''; position: absolute; left: -8px; top: 3px; bottom: 3px; width: 3px; background: #0969da; border-radius: 0 2px 2px 0; }
-.ma-nav-ic { display: flex; width: 16px; }
-.ma-nav-label { flex: 1; white-space: nowrap; }
-.ma-nav-chev { display: flex; }
-.ma-main { flex: 1; min-width: 0; display: flex; flex-direction: column; background: #fff; }
-.ma-toolbar { display: flex; align-items: center; gap: 10px; padding: 9px 16px; border-bottom: 1px solid #eef0f2; flex-shrink: 0; }
-.ma-search { width: 280px; border: 1px solid #d0d7de; border-radius: 6px; padding: 6px 10px; color: #8a929c; font-size: 13px; background: #fff; }
-.ma-filters { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #424a53; cursor: pointer; }
-.ma-caret { color: #8a929c; font-size: 10px; }
-.ma-toolbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-.ma-datebtn { display: flex; align-items: center; gap: 6px; border: 1px solid #d0d7de; border-radius: 6px; padding: 5px 10px; font-size: 13px; color: #424a53; background: #fff; }
-.ma-seg { display: inline-flex; border: 1px solid #d0d7de; border-radius: 6px; overflow: hidden; }
-.ma-seg-btn { padding: 4px 9px; font-size: 12px; color: #8a929c; border-right: 1px solid #d0d7de; background: #fff; }
-.ma-seg-btn:last-child { border-right: none; }
-.ma-seg-active { background: #f6f8fa; color: #24292f; }
-.ma-totals { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border-bottom: 1px solid #eef0f2; flex-shrink: 0; }
-.ma-totals-l { font-size: 15px; font-weight: 600; color: #24292f; display: flex; align-items: center; gap: 8px; }
-.ma-badge { background: #0969da; color: #fff; border-radius: 11px; min-width: 20px; height: 20px; padding: 0 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
-.ma-sort { font-size: 13px; color: #57606a; }
-.ma-scroll { flex: 1; overflow: hidden; background: #fff; }
-.ma-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; padding: 16px; }
-.ma-nomore { text-align: center; color: #57606a; font-size: 13px; padding: 18px 0 28px; }
-.ma-card { border: 1px solid #e6e9ec; border-radius: 8px; background: #fff; box-shadow: 0 1px 2px rgba(27,31,36,.05); display: flex; flex-direction: column; overflow: hidden; }
-.ma-card-head { display: flex; gap: 10px; padding: 12px 12px 10px; }
-.ma-avatar { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #d8dee4; background: #fff; flex-shrink: 0; }
-.ma-card-id { flex: 1; min-width: 0; }
-.ma-card-name { font-weight: 700; font-size: 14px; color: #24292f; line-height: 1.3; }
-.ma-card-meta { font-size: 12px; color: #57606a; line-height: 1.35; }
-.ma-card-actions { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 10px; }
-.ma-dots { color: #8a929c; font-size: 16px; letter-spacing: 1px; line-height: 1; cursor: pointer; }
-.ma-plat { width: 22px; height: 22px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; color: #fff; }
-.ma-card-divider { height: 1px; background: #eef0f2; }
-.ma-card-body { padding: 12px; flex: 1; }
-.ma-card-text { margin: 0; font-size: 13.5px; line-height: 1.5; color: #24292f; }
-.ma-video { position: relative; margin-top: 12px; height: 150px; border-radius: 6px; overflow: hidden; background: repeating-linear-gradient(135deg,#e9edf1,#e9edf1 12px,#e1e6eb 12px,#e1e6eb 24px); display: flex; align-items: center; justify-content: center; }
-.ma-video-ph { position: absolute; bottom: 8px; left: 8px; font-family: ui-monospace,SFMono-Regular,monospace; font-size: 10px; color: #9aa3ad; letter-spacing: .04em; }
-.ma-play { width: 54px; height: 54px; border-radius: 50%; background: #f00; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
-.ma-play-tri { width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid #fff; margin-left: 4px; }
-.ma-card-eng { display: flex; gap: 14px; padding: 9px 12px; border-top: 1px solid #eef0f2; }
-.ma-eng { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #57606a; }
+  /* Header */
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #111;
+    margin: 0 0 28px;
+  }
 
-/* ── Trial treatments ── */
-.tw-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 20; }
-.tw-dim { position: absolute; inset: 0; background: rgba(20,24,31,.55); }
-.tw-modal { position: relative; width: 540px; max-width: 92%; background: #fff; border-radius: 14px; box-shadow: 0 24px 64px rgba(0,0,0,.35); padding: 40px 44px 30px; text-align: center; }
-.tw-badge { width: 58px; height: 58px; border-radius: 50%; background: #ddeeff; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
-.tw-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #0969da; }
-.tw-modal h2 { margin: 10px 0 0; font-size: 27px; font-weight: 700; letter-spacing: -.02em; color: #24292f; }
-.tw-modal p { margin: 14px auto 0; max-width: 410px; font-size: 15px; line-height: 1.6; color: #57606a; }
-.tw-modal p b { color: #24292f; font-weight: 600; }
-.tw-meter { margin: 26px auto 0; max-width: 390px; text-align: left; }
-.tw-meter-row { display: flex; justify-content: space-between; font-size: 13px; color: #57606a; margin-bottom: 7px; }
-.tw-meter-bar { height: 7px; border-radius: 4px; background: #e6e9ec; overflow: hidden; }
-.tw-meter-fill { height: 100%; background: #0969da; border-radius: 4px; }
-.tw-actions { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; align-items: center; }
-.tw-btn-primary { background: #1f2328; color: #fff; border: none; border-radius: 8px; padding: 13px 28px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; max-width: 390px; }
-.tw-btn-primary:hover { background: #15181c; }
-.tw-link { color: #0969da; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; }
-.tw-link:hover { text-decoration: underline; }
-.tw-foot { margin-top: 18px; font-size: 12.5px; color: #8a929c; }
-.mc { margin-top: auto; }
-.mc-btn-dark { width: 100%; background: #1f2328; color: #fff; border: none; border-radius: 6px; padding: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
-.mc-btn-dark:hover { background: #15181c; }
-.t1 { border-top: 1px solid #e6e9ec; padding-top: 12px; text-align: center; }
-.t1 .mc-plan { font-size: 12px; font-weight: 700; color: #24292f; margin-bottom: 3px; }
-.t1 .mc-cap { font-size: 11.5px; color: #57606a; margin-bottom: 9px; }
+  /* Decision subheader */
+  .decision {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 0 0 8px;
+  }
 
-/* ── Homepage ── */
-.hp { font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #24292f; background: #fff; -webkit-font-smoothing: antialiased; }
-.hp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-.hp-header { border-bottom: 1px solid #eef0f2; position: sticky; top: 0; background: rgba(255,255,255,.9); backdrop-filter: blur(8px); z-index: 50; }
-.hp-header-in { display: flex; align-items: center; justify-content: space-between; padding: 17px 0; }
-.hp-logo { font-size: 19px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
-.hp-nav { display: flex; align-items: center; gap: 30px; }
-.hp-nav-link { font-size: 15px; font-weight: 500; color: #424a53; text-decoration: none; white-space: nowrap; }
-.hp-nav-link:hover { color: #24292f; }
-.hp-btn-dark { font-family: inherit; font-size: 14px; font-weight: 600; color: #fff; background: #1f2328; border: 1px solid #1f2328; border-radius: 7px; padding: 9px 18px; cursor: pointer; text-decoration: none; display: inline-block; white-space: nowrap; }
-.hp-btn-dark:hover { background: #15181c; }
-.hp-btn-outline { font-family: inherit; font-size: 14px; font-weight: 600; color: #24292f; background: #fff; border: 1px solid #d6dadf; border-radius: 7px; padding: 9px 18px; cursor: pointer; text-decoration: none; display: inline-block; white-space: nowrap; box-shadow: 0 1px 2px rgba(27,31,36,.05); }
-.hp-btn-outline:hover { background: #f6f8fa; }
-.hp-hero { padding: 86px 0 96px; }
-.hp-badge { display: inline-block; font-size: 13px; font-weight: 500; color: #424a53; border: 1px solid #e1e4e8; border-radius: 20px; padding: 5px 14px; margin-bottom: 26px; white-space: nowrap; }
-.hp-h1 { margin: 0; font-size: 58px; line-height: 1.06; font-weight: 700; letter-spacing: -.03em; max-width: 760px; }
-.hp-hero-p { margin: 26px 0 0; max-width: 470px; font-size: 17px; line-height: 1.6; color: #57606a; }
-.hp-hero-cta { margin-top: 34px; display: flex; gap: 14px; }
-.hp-hero-cta .hp-btn-dark, .hp-hero-cta .hp-btn-outline { font-size: 15px; padding: 12px 22px; }
-.hp-features-section { padding: 56px 0 76px; }
-.hp-features-section .hp-feature + .hp-feature { margin-top: 26px; }
-.hp-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; padding: 30px 0; }
-.hp-feature.rev .hp-feature-text { order: 2; }
-.hp-feature.rev .hp-feature-panel { order: 1; }
-.hp-feature-h { margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
-.hp-feature-p { margin: 18px 0 0; font-size: 16px; line-height: 1.6; color: #57606a; }
-.hp-feature-link { margin-top: 18px; display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: #0969da; text-decoration: none; }
-.hp-feature-link:hover { gap: 9px; }
-.hp-panel { height: 300px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
-.hp-panel-monitor { background: linear-gradient(135deg,#8f7cf2 0%,#5b8def 100%); }
-.hp-panel-research { background: linear-gradient(135deg,#d94fc4 0%,#f76b7e 60%,#ff9166 100%); }
-.hp-panel-collab { background: linear-gradient(135deg,#2f7bf0 0%,#19d3e6 100%); }
-.hp-why { background: #f6f8fa; padding: 84px 0; }
-.hp-section-h { margin: 0; text-align: center; font-size: 38px; font-weight: 700; letter-spacing: -.025em; }
-.hp-section-sub { margin: 18px auto 0; max-width: 560px; text-align: center; font-size: 16px; line-height: 1.6; color: #57606a; }
-.hp-why-grid { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 64px; max-width: 880px; margin-left: auto; margin-right: auto; }
-.hp-why-item-h { font-size: 17px; font-weight: 700; margin: 0 0 9px; }
-.hp-why-item-p { margin: 0; font-size: 15px; line-height: 1.6; color: #57606a; }
-.hp-pricing { padding: 84px 0; }
-.hp-pricing .cl-table { margin-top: 44px; }
-.hp-trusted { background: #f6f8fa; padding: 84px 0; }
-.hp-testimonials { margin-top: 52px; max-width: 820px; margin-left: auto; margin-right: auto; display: flex; flex-direction: column; gap: 40px; }
-.hp-quote-mark { font-family: Georgia,serif; font-size: 52px; line-height: .4; color: #c3cdd6; height: 26px; }
-.hp-quote-text { font-size: 19px; line-height: 1.5; font-weight: 500; color: #24292f; margin: 0 0 16px; max-width: 720px; }
-.hp-quote-by { display: flex; align-items: center; gap: 11px; }
-.hp-avatar { width: 34px; height: 34px; border-radius: 50%; background: #d0d7de; border: 1px solid #c3cdd6; flex-shrink: 0; }
-.hp-quote-name { font-size: 14px; font-weight: 600; color: #424a53; }
-.hp-research { padding: 84px 0; }
-.hp-cases { margin-top: 52px; display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
-.hp-case-h { font-size: 17px; font-weight: 700; margin: 0 0 10px; }
-.hp-case-p { margin: 0; font-size: 14.5px; line-height: 1.6; color: #57606a; }
-.hp-case-link { margin-top: 14px; display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 600; color: #0969da; text-decoration: none; }
-.hp-faq { background: #f6f8fa; padding: 84px 0 96px; }
-.hp-faq-cat { text-align: center; font-size: 22px; font-weight: 700; margin: 34px 0 0; }
-.hp-faq-list { max-width: 720px; margin: 26px auto 0; }
-.hp-faq-item { border-bottom: 1px solid #e1e4e8; }
-.hp-faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 4px; cursor: pointer; font-size: 16px; font-weight: 600; color: #24292f; list-style: none; }
-.hp-faq-q::-webkit-details-marker { display: none; }
-.hp-faq-plus { font-size: 22px; font-weight: 400; color: #57606a; line-height: 1; transition: transform .2s; }
-.hp-faq-item[open] .hp-faq-plus { transform: rotate(45deg); }
-.hp-faq-a { padding: 0 4px 22px; font-size: 15px; line-height: 1.65; color: #57606a; max-width: 640px; margin: 0; }
-.hp-cta-section { padding: 70px 0 90px; }
-.hp-cta-card { position: relative; border-radius: 20px; background: #fff; border: 1px solid #eef0f2; padding: 76px 40px; text-align: center; overflow: hidden; box-shadow: 0 1px 3px rgba(27,31,36,.05); }
-.hp-cta-card::before { content: ''; position: absolute; inset: -2px; border-radius: 22px; padding: 2px; background: linear-gradient(120deg,#8f7cf2,#f76b7e,#19d3e6); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; pointer-events: none; }
-.hp-cta-glow { position: absolute; width: 520px; height: 240px; left: 50%; bottom: -120px; transform: translateX(-50%); background: radial-gradient(ellipse,rgba(143,124,242,.28),rgba(25,211,230,.18) 55%,transparent 72%); filter: blur(8px); pointer-events: none; }
-.hp-cta-h { position: relative; margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -.025em; line-height: 1.12; }
-.hp-cta-p { position: relative; margin: 20px auto 0; max-width: 480px; font-size: 16px; line-height: 1.6; color: #57606a; }
-.hp-cta-btns { position: relative; margin-top: 32px; display: flex; gap: 14px; justify-content: center; }
-.hp-cta-btns .hp-btn-dark, .hp-cta-btns .hp-btn-outline { font-size: 15px; padding: 12px 22px; }
-.hp-footer { border-top: 1px solid #eef0f2; padding: 52px 0 0; }
-.hp-footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
-.hp-footer-dev { margin-top: 12px; font-size: 14px; color: #57606a; max-width: 280px; line-height: 1.5; }
-.hp-footer-devlink { color: #24292f; font-weight: 600; text-decoration: none; }
-.hp-footer-cols { display: flex; gap: 64px; }
-.hp-footer-col { display: flex; flex-direction: column; gap: 11px; }
-.hp-footer-col-h { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-.hp-footer-link { font-size: 14px; color: #57606a; text-decoration: none; }
-.hp-footer-link:hover { color: #24292f; }
-.hp-footer-bottom { margin-top: 48px; border-top: 1px solid #eef0f2; padding: 22px 0 30px; font-size: 13px; color: #57606a; }
+  /* Body text */
+  p {
+    margin: 0 0 24px;
+    color: #333;
+    text-wrap: pretty;
+  }
+
+  /* Section header */
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin: 56px 0 32px;
+    padding-top: 48px;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  /* Flow entries */
+  .flow { margin-bottom: 48px; }
+
+  .flow-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 4px;
+  }
+
+  .flow h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin: 0 0 12px;
+  }
+
+  .flow p {
+    margin: 0 0 16px;
+    color: #444;
+  }
+
+  .flow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1.5px solid #ddd;
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+    white-space: nowrap;
+  }
+  .flow-link:hover { border-color: #111; }
+  .flow-link::after { content: '→'; font-size: 13px; }
+
+  .flow h3 .rec-badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #1a1a1a;
+    border-radius: 4px;
+    padding: 2px 7px;
+    position: relative;
+    top: -2px;
+  }
+  .flow + .flow { border-top: 1px solid #f0f0f0; padding-top: 40px; }
+
+  /* Footer note */
+  .footnote {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid #e8e8e8;
+    font-size: 14px;
+    color: #999;
+  }
 </style>
 </head>
 <body>
-<div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel">
-const { useState } = React;
+<script src="auth.js"></script>
+<div class="page">
 
-// ─────────────────────────────────────────────────────────────────────
-// PRICING PAGE
-// ─────────────────────────────────────────────────────────────────────
+  <h1>Three Flow Variants for Subscription</h1>
 
-const CL_PLANS = [
-  {
-    name: 'Basic', desc: 'For small newsrooms and research teams',
-    price: '$100', sub: 'per month / $1,000 per year', cta: 'Subscribe', ctaStyle: 'solid',
-    features: [
-      { t: 'Everything in Free, plus:', ok: true },
-      { t: 'Full monitoring access', ok: true },
-      { t: 'Unlimited searches with filters', ok: true },
-      { t: 'Up to 5 team members', ok: true },
-      { t: '1 hour onboarding', ok: true },
-      { t: 'No channel tracking credits', ok: false },
-    ],
-  },
-  {
-    name: 'Standard', desc: 'For growing organizations and research institutions',
-    price: '$500', sub: 'per month / $5,000 per year', cta: 'Subscribe', ctaStyle: 'solid',
-    features: [
-      { t: 'Everything in Basic, plus:', ok: true },
-      { t: '500 channel tracking credits/year', ok: true },
-      { t: 'Access to 5 Public Actor Sets', ok: true },
-      { t: '25 private Lists', ok: true },
-      { t: 'Unlimited SMS-based tiplines', ok: true },
-      { t: '50 CSV exports per month', ok: true },
-      { t: 'Up to 10 team members', ok: true },
-    ],
-  },
-  {
-    name: 'Advanced', desc: 'For large newsrooms and advanced research teams',
-    price: '$1,000', sub: 'per month / $10,000 per year', cta: 'Subscribe', ctaStyle: 'solid',
-    features: [
-      { t: 'Everything in Standard, plus:', ok: true },
-      { t: '1,000 channel tracking credits/year', ok: true },
-      { t: 'API rate limit of 500 requests/hour', ok: true },
-      { t: 'Access to 10 Public Actor Sets', ok: true },
-      { t: '10 Projects with content labeling', ok: true },
-      { t: 'Create up to 5 Public Dashboards', ok: true },
-      { t: 'Up to 50 private Lists', ok: true },
-      { t: '500 CSV exports per month', ok: true },
-      { t: 'Up to 25 team members', ok: true },
-    ],
-  },
-  {
-    name: 'Pro', desc: 'For enterprise organizations and data-driven institutions',
-    price: '$2,500', sub: 'per month / $25,000 per year', cta: 'Contact Sales', ctaStyle: 'outline',
-    features: [
-      { t: 'Everything in Advanced, plus:', ok: true },
-      { t: '10,000 channel tracking credits/year', ok: true },
-      { t: 'API rate limit of 5,000 requests/hour', ok: true },
-      { t: 'Private Actor Sets and unlimited Public Actor Sets', ok: true },
-      { t: 'Unlimited Projects and Pipelines', ok: true },
-      { t: 'Unlimited Public and Private Dashboards', ok: true },
-      { t: 'Up to 100 private Lists', ok: true },
-      { t: 'Unlimited CSV exports', ok: true },
-      { t: 'Up to 50 team members', ok: true },
-    ],
-  },
-];
+  <p class="decision">Decision needed: which subscription flow do we ship?</p>
 
-function ClCheck() {
-  return (
-    <svg className="cl-fi-ic" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M13.5 4.5 6.5 11.5 2.75 7.75" stroke="#2da44e" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function ClX() {
-  return (
-    <svg className="cl-fi-ic" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M4 4l8 8M12 4l-8 8" stroke="#8a929c" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
-function ClChevronUp() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ marginRight: 7 }}>
-      <path d="M4 10l4-4 4 4" stroke="#24292f" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function ClChevronRight() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ marginLeft: 5, opacity: 0.55 }}>
-      <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
+  <p>We've built three working prototypes, each representing a different philosophy for how a new user moves from first click to active trial. The task now is to align on one. Walk through each prototype, discuss the tradeoffs, and pick a direction. If none of these feel quite right, the goal shifts: identify specifically what's missing and we'll build a fourth variant that addresses it.</p>
 
-function ClPlanColumn({ plan, idx, onSubscribe }) {
-  return (
-    <div className="cl-col" style={{ borderLeft: idx === 0 ? 'none' : '1px solid #ededf0' }}>
-      <h3 className="cl-plan-name">{plan.name}</h3>
-      <p className="cl-plan-desc">{plan.desc}</p>
-      <div className="cl-price">
-        <span className="cl-price-amt">{plan.price}</span>
-        <sup className="cl-price-cur">USD</sup>
-      </div>
-      <p className="cl-price-sub">{plan.sub}</p>
-      {plan.ctaStyle === 'solid' ? (
-        <button className="cl-btn cl-btn-solid" onClick={() => onSubscribe && onSubscribe(plan.name)}>{plan.cta}</button>
-      ) : (
-        <button className="cl-btn cl-btn-outline">{plan.cta}</button>
-      )}
-      <div className="cl-col-divider"></div>
-      <div className="cl-included"><ClChevronUp />What's included</div>
-      <ul className="cl-features">
-        {plan.features.map((f, i) => (
-          <li className="cl-feature" key={i}>
-            {f.ok ? <ClCheck /> : <ClX />}
-            <span className={f.ok ? 'cl-feature-txt' : 'cl-feature-txt cl-feature-off'}>{f.t}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+  <h2>The three flow variants</h2>
 
-function PricingPage({ freeCallout, onSubscribe, onGetStarted }) {
-  return (
-    <div className="cl">
-      <header className="cl-header">
-        <div className="cl-wrap cl-header-wrap">
-          <div className="cl-logo">Civic Lens</div>
-          <nav className="cl-nav">
-            <a className="cl-nav-link" href="#">Features</a>
-            <a className="cl-nav-link" href="#">Pricing</a>
-            <a className="cl-nav-link" href="#">FAQ</a>
-            <a className="cl-nav-link" href="#">Dashboard</a>
-            <button className="cl-getstarted" onClick={onGetStarted || (() => window.scrollTo(0,0))}>Get Started</button>
-          </nav>
-        </div>
-      </header>
-      <section className="cl-hero">
-        <h1 className="cl-h1">Choose your plan</h1>
-        <p className="cl-hero-sub">From individual researchers to enterprise teams, we have a plan that fits your needs.</p>
-      </section>
-      <div className="cl-wrap cl-free-slot">{freeCallout}</div>
-      <section className="cl-wrap cl-table-wrap">
-        <div className="cl-table">
-          {CL_PLANS.map((plan, i) => (
-            <ClPlanColumn plan={plan} idx={i} key={plan.name} onSubscribe={onSubscribe} />
-          ))}
-        </div>
-      </section>
-      <section className="cl-elig">
-        <div className="cl-wrap cl-elig-inner">
-          <h2 className="cl-elig-h">Eligibility</h2>
-          <p className="cl-elig-p">Civic Lens is available to journalists, researchers, academics, civil society organizations, and other professionals working to understand and combat misinformation. We review all applications to ensure our platform is used responsibly.</p>
-        </div>
-      </section>
-      <footer className="cl-footer">
-        <div className="cl-wrap cl-footer-top">
-          <div>
-            <div className="cl-logo">Civic Lens</div>
-            <div className="cl-footer-dev">Developed by the <a className="cl-footer-devlink" href="#">Algorithmic Transparency Institute</a><ClChevronRight /></div>
-          </div>
-          <div className="cl-footer-cols">
-            <div className="cl-footer-col">
-              <div className="cl-footer-col-h">Product</div>
-              <a className="cl-footer-link" href="#">Features<ClChevronRight /></a>
-              <a className="cl-footer-link" href="#">Pricing<ClChevronRight /></a>
-              <a className="cl-footer-link" href="#">FAQ<ClChevronRight /></a>
-            </div>
-            <div className="cl-footer-col">
-              <div className="cl-footer-col-h">Company</div>
-              <a className="cl-footer-link" href="#">About ATI<ClChevronRight /></a>
-              <a className="cl-footer-link" href="#">Contact<ClChevronRight /></a>
-            </div>
-            <div className="cl-footer-col">
-              <div className="cl-footer-col-h">Legal</div>
-              <a className="cl-footer-link" href="#">Privacy Policy<ClChevronRight /></a>
-              <a className="cl-footer-link" href="#">Terms of Service<ClChevronRight /></a>
-            </div>
-          </div>
-        </div>
-        <div className="cl-footer-bottom">
-          <div className="cl-wrap">© 2026 Algorithmic Transparency Institute. All rights reserved.</div>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────
-// MONITOR APP
-// ─────────────────────────────────────────────────────────────────────
-
-const MA_POSTS = [
-  { name: 'The Young Turks', followers: '5.8M followers', ago: '5 days ago', platform: 'youtube', text: "They're doing it again. Another policy that will destroy American families while elites profit.", eng: { views: '470.7K', likes: '36.2K', shares: '1.6K', comments: '1.9K' } },
-  { name: 'Breitbart News', followers: '4.5M followers', ago: '5 days ago', platform: 'facebook', text: 'Deep state operatives have been caught coordinating with media to suppress this story.', eng: { views: '1M', likes: '27.8K', shares: '9.5K', comments: '3.3K' } },
-  { name: 'Marjorie Taylor Greene', followers: '3.8M followers', ago: '6 days ago', platform: 'twitter', text: 'The mainstream narrative is collapsing as more evidence comes to light. Share widely.', eng: { views: '953.2K', likes: '32.9K', shares: '3.7K', comments: '1.1K' } },
-  { name: 'Russell Brand', followers: '6.7M followers', ago: '6 days ago', platform: 'youtube', text: "Fact: The data on this has been manipulated. Here's the original unedited version.", video: true, eng: { views: '1.4M', likes: '42.3K', shares: '7.1K', comments: '7.6K' } },
-];
-
-const MAi = {
-  chevron: (d) => <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d={d === 'up' ? 'M4 10l4-4 4 4' : 'M4 6l4 4 4-4'} stroke="#57606a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>,
-  monitor: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="9" rx="1.4" stroke={c} strokeWidth="1.3" /><path d="M6 14h4M8 11.5V14" stroke={c} strokeWidth="1.3" strokeLinecap="round" /></svg>,
-  list: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8" stroke={c} strokeWidth="1.4" strokeLinecap="round" /><circle cx="2.5" cy="4" r="1" fill={c} /><circle cx="2.5" cy="8" r="1" fill={c} /><circle cx="2.5" cy="12" r="1" fill={c} /></svg>,
-  antenna: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="6" r="1.4" fill={c} /><path d="M5 9a4 4 0 0 1 0-6M11 3a4 4 0 0 1 0 6M8 7.3l-1.4 6.2h2.8L8 7.3z" stroke={c} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>,
-  tag: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 2.5h5l6 6-5 5-6-6v-5z" stroke={c} strokeWidth="1.3" strokeLinejoin="round" /><circle cx="5.2" cy="5.2" r="1" fill={c} /></svg>,
-  people: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6" cy="5.5" r="2.2" stroke={c} strokeWidth="1.3" /><path d="M2.5 13c0-2 1.6-3.3 3.5-3.3S9.5 11 9.5 13" stroke={c} strokeWidth="1.3" strokeLinecap="round" /><path d="M10.5 4.2A2 2 0 0 1 12 7.7M11.2 9.9c1.5.2 2.6 1.4 2.6 3.1" stroke={c} strokeWidth="1.3" strokeLinecap="round" /></svg>,
-  eye: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z" stroke={c} strokeWidth="1.3" /><circle cx="8" cy="8" r="1.8" stroke={c} strokeWidth="1.3" /></svg>,
-  gear: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="2.1" stroke={c} strokeWidth="1.3" /><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" stroke={c} strokeWidth="1.2" strokeLinecap="round" /></svg>,
-  building: (c) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="2" width="7" height="12" rx="0.6" stroke={c} strokeWidth="1.3" /><path d="M9.5 6h4v8h-4" stroke={c} strokeWidth="1.3" /><path d="M4.5 4.5h1M6.5 4.5h1M4.5 7h1M6.5 7h1M4.5 9.5h1M6.5 9.5h1M11 8.5h1M11 11h1" stroke={c} strokeWidth="1.1" strokeLinecap="round" /></svg>,
-  aperture: (c) => <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke={c} strokeWidth="1.3" /><path d="M8 2.2 5 7.3M13.5 6.2 7.6 6.6M11 13.6 8.5 8.3M2.5 9.8l5.9-.4M4.9 2.4 8 7.7" stroke={c} strokeWidth="1.1" strokeLinecap="round" /></svg>,
-  help: (c) => <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke={c} strokeWidth="1.3" /><path d="M6.3 6.2a1.8 1.8 0 0 1 3.5.5c0 1.2-1.3 1.4-1.3 2.4" stroke={c} strokeWidth="1.3" strokeLinecap="round" /><circle cx="8.4" cy="11.3" r="0.8" fill={c} /></svg>,
-  funnel: (c) => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 3.5h12l-4.6 5.3V13L6.6 11.7V8.8L2 3.5z" stroke={c} strokeWidth="1.3" strokeLinejoin="round" /></svg>,
-  cal: (c) => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.4" stroke={c} strokeWidth="1.3" /><path d="M2 6h12M5 1.6v2.4M11 1.6v2.4" stroke={c} strokeWidth="1.3" strokeLinecap="round" /></svg>,
-  engEye: (c) => <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M1.5 8S4 3.8 8 3.8 14.5 8 14.5 8 12 12.2 8 12.2 1.5 8 1.5 8z" stroke={c} strokeWidth="1.2"/><circle cx="8" cy="8" r="1.7" stroke={c} strokeWidth="1.2"/></svg>,
-  heart: (c) => <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13.2S2 9.8 2 5.9A2.9 2.9 0 0 1 8 4.6 2.9 2.9 0 0 1 14 5.9c0 3.9-6 7.3-6 7.3z" stroke={c} strokeWidth="1.2" strokeLinejoin="round"/></svg>,
-  share: (c) => <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="4" cy="8" r="2" stroke={c} strokeWidth="1.2"/><circle cx="12" cy="3.5" r="2" stroke={c} strokeWidth="1.2"/><circle cx="12" cy="12.5" r="2" stroke={c} strokeWidth="1.2"/><path d="M5.8 7l4.4-2.4M5.8 9l4.4 2.4" stroke={c} strokeWidth="1.2"/></svg>,
-  comment: (c) => <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 3.5h12v8H6l-3 2.3V11.5H2v-8z" stroke={c} strokeWidth="1.2" strokeLinejoin="round"/></svg>,
-};
-
-function MAPlatform({ p }) {
-  if (p === 'youtube') return <span className="ma-plat" style={{ background: '#f00' }}><span style={{ width:0, height:0, borderTop:'4px solid transparent', borderBottom:'4px solid transparent', borderLeft:'7px solid #fff', marginLeft:1 }}></span></span>;
-  if (p === 'facebook') return <span className="ma-plat" style={{ background:'#1877f2', fontFamily:'Georgia,serif', fontWeight:700, fontSize:13 }}>f</span>;
-  return <span className="ma-plat" style={{ background:'#000', fontWeight:700, fontSize:11, fontFamily:'Arial' }}>𝕏</span>;
-}
-
-function MANavItem({ icon, label, active, chevron }) {
-  const c = active ? '#0550ae' : '#57606a';
-  return (
-    <div className={active ? 'ma-nav-item ma-nav-active' : 'ma-nav-item'}>
-      <span className="ma-nav-ic">{icon(c)}</span>
-      <span className="ma-nav-label">{label}</span>
-      {chevron && <span className="ma-nav-chev">{MAi.chevron(chevron)}</span>}
-    </div>
-  );
-}
-
-function MAPostCard({ post }) {
-  const g = '#57606a';
-  return (
-    <div className="ma-card">
-      <div className="ma-card-head">
-        <div className="ma-avatar"></div>
-        <div className="ma-card-id">
-          <div className="ma-card-name">{post.name}</div>
-          <div className="ma-card-meta">{post.followers}</div>
-          <div className="ma-card-meta">{post.ago}</div>
-        </div>
-        <div className="ma-card-actions">
-          <span className="ma-dots">···</span>
-          <MAPlatform p={post.platform} />
-        </div>
-      </div>
-      <div className="ma-card-divider"></div>
-      <div className="ma-card-body">
-        <p className="ma-card-text">{post.text}</p>
-        {post.video && (
-          <div className="ma-video">
-            <span className="ma-video-ph">video thumbnail</span>
-            <span className="ma-play"><span className="ma-play-tri"></span></span>
-          </div>
-        )}
-      </div>
-      <div className="ma-card-eng">
-        <span className="ma-eng">{MAi.engEye(g)} {post.eng.views}</span>
-        <span className="ma-eng">{MAi.heart(g)} {post.eng.likes}</span>
-        <span className="ma-eng">{MAi.share(g)} {post.eng.shares}</span>
-        <span className="ma-eng">{MAi.comment(g)} {post.eng.comments}</span>
-      </div>
-    </div>
-  );
-}
-
-function MonitorApp({ topBanner, sidebarCard, overlay, orgName = 'Acme Newsroom' }) {
-  return (
-    <div className="ma-app">
-      <div className="ma-accentline"></div>
-      <div className="ma-topbar">
-        <div className="ma-org">
-          <span className="ma-org-ic">{MAi.aperture('#24292f')}</span>
-          <span className="ma-org-name">{orgName}</span>
-          <span className="ma-org-sep">/ All Projects</span>
-          <span className="ma-org-section">Monitoring</span>
-        </div>
-        <div className="ma-topright">
-          <span className="ma-icon-btn">{MAi.help('#57606a')}</span>
-          <span className="ma-user"></span>
-        </div>
-      </div>
-      <div className="ma-body">
-        <aside className="ma-sidebar">
-          <div className="ma-nav-group">
-            <MANavItem icon={MAi.monitor} label="Monitor" chevron="up" />
-            <div className="ma-nav-children">
-              <MANavItem icon={MAi.list} label="Posts" active />
-              <MANavItem icon={MAi.antenna} label="Channels" />
-              <MANavItem icon={MAi.tag} label="Search Terms" />
-              <MANavItem icon={MAi.people} label="Actors" />
-              <MANavItem icon={MAi.list} label="Lists" />
-            </div>
-          </div>
-          <MANavItem icon={MAi.eye} label="Investigate" chevron="down" />
-          <MANavItem icon={MAi.gear} label="Manage" chevron="down" />
-          <MANavItem icon={MAi.building} label="Organization Settings" chevron="down" />
-          {sidebarCard}
-        </aside>
-        <main className="ma-main">
-          {topBanner}
-          <div className="ma-toolbar">
-            <div className="ma-search">Search posts by keyword…</div>
-            <div className="ma-filters">{MAi.funnel('#57606a')} Filters <span className="ma-caret">▾</span></div>
-            <div className="ma-toolbar-right">
-              <div className="ma-datebtn">{MAi.cal('#57606a')} Last 7 days</div>
-              <div className="ma-seg">
-                <span className="ma-seg-btn ma-seg-active">▦</span>
-                <span className="ma-seg-btn">📈</span>
-                <span className="ma-seg-btn">🏷</span>
-              </div>
-            </div>
-          </div>
-          <div className="ma-totals">
-            <div className="ma-totals-l">Total Posts: <span className="ma-badge">4</span></div>
-            <div className="ma-sort">Sort: Newest ↓ <span className="ma-caret">▾</span></div>
-          </div>
-          <div className="ma-scroll">
-            <div className="ma-grid">
-              {MA_POSTS.map((p, i) => <MAPostCard post={p} key={i} />)}
-            </div>
-            <div className="ma-nomore">No more posts to load</div>
-          </div>
-        </main>
-      </div>
-      {overlay}
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────
-// HOMEPAGE
-// ─────────────────────────────────────────────────────────────────────
-
-const Arrow = () => (
-  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const SatelliteGlyph = (
-  <svg width="96" height="96" viewBox="0 0 96 96" fill="none" aria-hidden="true" style={{ opacity: 0.95 }}>
-    <ellipse cx="40" cy="55" rx="26" ry="13" transform="rotate(-40 40 55)" stroke="#fff" strokeWidth="3.6" />
-    <path d="M40 55 56 39" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" />
-    <circle cx="58" cy="37" r="4" fill="#fff" />
-    <path d="M33 61 28 82M47 67 41 82M23 82h24" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M64 33a15 15 0 0 1 5 11" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
-    <path d="M69 23a27 27 0 0 1 9 20" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.68" />
-  </svg>
-);
-
-const SearchGlyph = (
-  <svg width="88" height="88" viewBox="0 0 88 88" fill="none" aria-hidden="true">
-    <circle cx="38" cy="38" r="22" stroke="#fff" strokeWidth="4.5" />
-    <path d="M54 54 70 70" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
-    <path d="M30 38h16M38 30v16" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" opacity="0.85" />
-  </svg>
-);
-
-const PeopleGlyph = (
-  <svg width="100" height="92" viewBox="0 0 100 92" fill="none" aria-hidden="true">
-    <circle cx="38" cy="34" r="13" stroke="#fff" strokeWidth="4" />
-    <path d="M18 70c0-12 9-20 20-20s20 8 20 20" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-    <circle cx="68" cy="38" r="10" stroke="#fff" strokeWidth="4" opacity="0.85" />
-    <path d="M62 68c0-9 5-16 12-16s12 6 12 15" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity="0.85" />
-  </svg>
-);
-
-function FAQItem({ q, a, open }) {
-  return (
-    <details className="hp-faq-item" open={open}>
-      <summary className="hp-faq-q">{q}<span className="hp-faq-plus">+</span></summary>
-      <p className="hp-faq-a">{a}</p>
-    </details>
-  );
-}
-
-function HomePage({ onGetStarted, onSubscribe }) {
-  const goPlans = onGetStarted || (() => { location.href = 'membership.html'; });
-  const doSubscribe = onSubscribe || ((name) => { location.href = 'monitoring_membership_confirmation.html?plan=' + encodeURIComponent(name); });
-
-  return (
-    <div className="hp">
-      <header className="hp-header">
-        <div className="hp-wrap hp-header-in">
-          <div className="hp-logo">Civic Lens</div>
-          <nav className="hp-nav">
-            <a className="hp-nav-link" href="#features">Features</a>
-            <a className="hp-nav-link" href="#pricing">Pricing</a>
-            <a className="hp-nav-link" href="#faq">FAQ</a>
-            <a className="hp-nav-link" href="#">Sign In</a>
-            <button className="hp-btn-dark" onClick={goPlans}>Get Started</button>
-          </nav>
-        </div>
-      </header>
-
-      <section className="hp-wrap hp-hero">
-        <span className="hp-badge">Social Media Intelligence Platform</span>
-        <h1 className="hp-h1">Decode what really matters across social media</h1>
-        <p className="hp-hero-p">Developed by the Algorithmic Transparency Institute for journalists, researchers, and change makers. Monitor 250,000+ channels across platforms with powerful search and analysis tools.</p>
-        <div className="hp-hero-cta">
-          <button className="hp-btn-dark" onClick={goPlans}>Get Started Free</button>
-          <a className="hp-btn-outline" href="#features">Explore Features</a>
-        </div>
-      </section>
-
-      <section id="features" className="hp-wrap hp-features-section">
-        <div className="hp-feature">
-          <div className="hp-feature-text">
-            <h2 className="hp-feature-h">Monitor Social Media at Scale</h2>
-            <p className="hp-feature-p">Track over 250,000+ channels across Facebook, Twitter/X, YouTube, Instagram, Telegram, and more. Get daily automated updates and stay ahead of emerging narratives and trends before they go viral.</p>
-            <a className="hp-feature-link" href="#" onClick={e => { e.preventDefault(); goPlans(); }}>Start monitoring <Arrow /></a>
-          </div>
-          <div className="hp-feature-panel"><div className="hp-panel hp-panel-monitor">{SatelliteGlyph}</div></div>
-        </div>
-        <div className="hp-feature rev">
-          <div className="hp-feature-text">
-            <h2 className="hp-feature-h">Powerful Research Tools</h2>
-            <p className="hp-feature-p">Advanced boolean search with granular filters for platform, date range, engagement metrics, and more. Export to CSV or leverage our API for custom integrations with your existing research workflows.</p>
-            <a className="hp-feature-link" href="#" onClick={e => { e.preventDefault(); goPlans(); }}>Explore search <Arrow /></a>
-          </div>
-          <div className="hp-feature-panel"><div className="hp-panel hp-panel-research">{SearchGlyph}</div></div>
-        </div>
-        <div className="hp-feature">
-          <div className="hp-feature-text">
-            <h2 className="hp-feature-h">Collaborate with Your Team</h2>
-            <p className="hp-feature-p">Create and share custom lists, work with team members on investigations, and access public actor sets from the research community. Build on the work of others to accelerate your research.</p>
-            <a className="hp-feature-link" href="#" onClick={e => { e.preventDefault(); goPlans(); }}>See collaboration tools <Arrow /></a>
-          </div>
-          <div className="hp-feature-panel"><div className="hp-panel hp-panel-collab">{PeopleGlyph}</div></div>
-        </div>
-      </section>
-
-      <section className="hp-why">
-        <div className="hp-wrap">
-          <h2 className="hp-section-h">Why researchers choose Civic Lens</h2>
-          <p className="hp-section-sub">Built by researchers, for researchers. We understand the unique challenges of tracking online discourse at scale.</p>
-          <div className="hp-why-grid">
-            <div><h3 className="hp-why-item-h">Real-time Updates</h3><p className="hp-why-item-p">Channels are updated daily with new content. High-priority channels can be updated more frequently upon request.</p></div>
-            <div><h3 className="hp-why-item-h">Multi-Platform Coverage</h3><p className="hp-why-item-p">One dashboard for Facebook, Twitter/X, YouTube, TikTok, Instagram, Telegram, VK, Rumble, and more platforms.</p></div>
-            <div><h3 className="hp-why-item-h">Data Export &amp; API</h3><p className="hp-why-item-p">Export your research to CSV or connect via our REST API for programmatic access and custom analysis pipelines.</p></div>
-            <div><h3 className="hp-why-item-h">Research Community</h3><p className="hp-why-item-p">Access shared actor sets and lists from the research community. Collaborate on investigations with peers worldwide.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing" className="hp-pricing">
-        <div className="hp-wrap">
-          <h2 className="hp-section-h">Choose your plan</h2>
-          <p className="hp-section-sub">From individual researchers to enterprise teams, we have a plan that fits your needs.</p>
-          <div className="cl-table">
-            {CL_PLANS.map((plan, i) => <ClPlanColumn plan={plan} idx={i} key={plan.name} onSubscribe={doSubscribe} />)}
-          </div>
-        </div>
-      </section>
-
-      <section className="hp-trusted">
-        <div className="hp-wrap">
-          <h2 className="hp-section-h">Trusted by leading researchers</h2>
-          <p className="hp-section-sub">Journalists, academics, and civil society organizations rely on Civic Lens for their most important investigations.</p>
-          <div className="hp-testimonials">
-            <div>
-              <div className="hp-quote-mark">&ldquo;</div>
-              <p className="hp-quote-text">Civic Lens has transformed how we track misinformation campaigns. What used to take weeks now takes hours. The cross-platform search is incredibly powerful.</p>
-              <div className="hp-quote-by"><span className="hp-avatar"></span><span className="hp-quote-name">Dr. Sarah Chen</span></div>
-            </div>
-            <div>
-              <div className="hp-quote-mark">&ldquo;</div>
-              <p className="hp-quote-text">The ability to create shared lists and collaborate with colleagues across institutions has been game-changing for our research consortium.</p>
-              <div className="hp-quote-by"><span className="hp-avatar"></span><span className="hp-quote-name">Marcus Johnson</span></div>
-            </div>
-            <div>
-              <div className="hp-quote-mark">&ldquo;</div>
-              <p className="hp-quote-text">As a journalist on deadline, I need fast, reliable access to social media data. Civic Lens delivers every time with their comprehensive channel coverage.</p>
-              <div className="hp-quote-by"><span className="hp-avatar"></span><span className="hp-quote-name">Elena Rodriguez</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="hp-research">
-        <div className="hp-wrap">
-          <h2 className="hp-section-h">Research in action</h2>
-          <p className="hp-section-sub">See how researchers are using Civic Lens to uncover important stories.</p>
-          <div className="hp-cases">
-            <div>
-              <h3 className="hp-case-h">Election Integrity Monitoring</h3>
-              <p className="hp-case-p">How a coalition of researchers tracked coordinated inauthentic behavior across 18 countries during the 2024 election cycle.</p>
-              <a className="hp-case-link" href="#">Learn more <Arrow /></a>
-            </div>
-            <div>
-              <h3 className="hp-case-h">Health Misinformation Study</h3>
-              <p className="hp-case-p">Academic researchers used Civic Lens to map the spread of vaccine misinformation across Telegram and Facebook groups.</p>
-              <a className="hp-case-link" href="#">Learn more <Arrow /></a>
-            </div>
-            <div>
-              <h3 className="hp-case-h">Climate Denial Networks</h3>
-              <p className="hp-case-p">Investigative journalists uncovered a network of coordinated accounts spreading climate disinformation using our cross-platform analysis.</p>
-              <a className="hp-case-link" href="#">Learn more <Arrow /></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" className="hp-faq">
-        <div className="hp-wrap">
-          <h2 className="hp-section-h">Frequently asked questions</h2>
-          <div className="hp-faq-cat">General</div>
-          <div className="hp-faq-list">
-            <FAQItem q="What platforms does Civic Lens monitor?" a="Facebook, Twitter/X, YouTube, TikTok, Instagram, Telegram, VK, Rumble, and more — all from a single dashboard." />
-            <FAQItem q="How often is data updated?" a="Channels are updated daily with new content. High-priority channels can be updated more frequently upon request." />
-            <FAQItem q="Can I export my research data?" a="Yes. Export your research to CSV at any time, or connect via our REST API for programmatic access and custom pipelines." />
-            <FAQItem q="Who is eligible to use Civic Lens?" a="Journalists, researchers, academics, and civil society organizations working to understand and combat misinformation. We review all applications to ensure responsible use." />
-            <FAQItem q="Is there a free tier?" a="Every paid plan starts with a free 14-day trial — full access to every feature, with no credit card required up front." />
-          </div>
-        </div>
-      </section>
-
-      <section className="hp-wrap hp-cta-section">
-        <div className="hp-cta-card">
-          <div className="hp-cta-glow"></div>
-          <h2 className="hp-cta-h">Ready to start your research?</h2>
-          <p className="hp-cta-p">Join thousands of researchers, journalists, and analysts using Civic Lens to understand social media at scale.</p>
-          <div className="hp-cta-btns">
-            <button className="hp-btn-dark" onClick={goPlans}>Get Started Free</button>
-            <button className="hp-btn-outline">Contact Sales</button>
-          </div>
-        </div>
-      </section>
-
-      <footer className="hp-footer">
-        <div className="hp-wrap">
-          <div className="hp-footer-top">
-            <div>
-              <div className="hp-logo">Civic Lens</div>
-              <div className="hp-footer-dev">Developed by the <a className="hp-footer-devlink" href="#">Algorithmic Transparency Institute</a></div>
-            </div>
-            <div className="hp-footer-cols">
-              <div className="hp-footer-col">
-                <div className="hp-footer-col-h">Product</div>
-                <a className="hp-footer-link" href="#features">Features</a>
-                <a className="hp-footer-link" href="#pricing">Pricing</a>
-                <a className="hp-footer-link" href="#faq">FAQ</a>
-              </div>
-              <div className="hp-footer-col">
-                <div className="hp-footer-col-h">Company</div>
-                <a className="hp-footer-link" href="#">About ATI</a>
-                <a className="hp-footer-link" href="#">Contact</a>
-              </div>
-              <div className="hp-footer-col">
-                <div className="hp-footer-col-h">Legal</div>
-                <a className="hp-footer-link" href="#">Privacy Policy</a>
-                <a className="hp-footer-link" href="#">Terms of Service</a>
-              </div>
-            </div>
-          </div>
-          <div className="hp-footer-bottom">© 2026 Algorithmic Transparency Institute. All rights reserved.</div>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────
-// PROTOTYPE — full 4-screen flow via React state
-// Home → Pricing → Monitoring Membership Confirmation (modal) → App
-// ─────────────────────────────────────────────────────────────────────
-
-const FreeCallout = (
-  <div className="fcA">
-    <div className="fcA-big">Free for 14 days</div>
-    <div className="fcA-sub">Full features, no credit card needed up front</div>
+  <div class="flow">
+    <div class="flow-label">Flow A</div>
+    <h3>Pay for a subscription or get the free plan</h3>
+    <p>The user is presented with all subscription options up front. They can either subscribe directly or start a free 14-day trial of any plan — the choice is theirs. The "free for 14 days" offer is made explicit above the plan table, so both paths are visible from the start. This gives users full information before committing and positions the free trial as a deliberate opt-in rather than a default.</p>
+    <a class="flow-link" href="Prototype A.html">View Prototype A</a>
   </div>
-);
 
-const CheckBlue = (
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d="M20 6.5 9.5 17 4.5 12" stroke="#0969da" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+  <div class="flow">
+    <div class="flow-label">Flow B</div>
+    <h3>All plans start free</h3>
+    <p>A small but meaningful reframe from Flow A: rather than separating "free trial" as a distinct concept, every plan simply starts free for 14 days. The user still chooses a plan upfront, but the framing removes the friction of "am I committing?" The implicit message is that choosing a plan is low-stakes, because nothing is charged until the trial ends. At renewal time, they can change their plan if they want something different.</p>
+    <a class="flow-link" href="Prototype B.html">View Prototype B</a>
+  </div>
 
-function Prototype() {
-  const [screen, setScreen] = useState('home');
-  const [plan, setPlan] = useState('Advanced');
-  const [showModal, setShowModal] = useState(true);
+  <div class="flow">
+    <div class="flow-label">Flow C</div>
+    <h3 data-comment-anchor="39a32140d7-h3">Try it first, decide later <span class="rec-badge">Recommended</span></h3>
+    <p>A more radical departure. The user isn't asked to engage with subscriptions at all when they sign up — they simply log in and get access. Behind the scenes they're on an Advanced-level trial, but the interface doesn't surface that detail. They get 14 days of full access, and the subscription conversation only happens when it's time to pay. This is a common pattern for B2B SaaS products where the goal is to get users to the value of the product as quickly as possible, with minimal cognitive overhead at the door.</p>
+    <a class="flow-link" href="Prototype C.html">View Prototype C</a>
+  </div>
 
-  const goConfirmation = (name) => {
-    setPlan(name);
-    setShowModal(true);
-    setScreen('monitoring_membership_confirmation');
-  };
+  <p class="footnote">Civic Lens subscription flow explorations · June 2026</p>
 
-  if (screen === 'home') {
-    return (
-      <HomePage
-        onGetStarted={() => setScreen('pricing')}
-        onSubscribe={goConfirmation}
-      />
-    );
-  }
-
-  if (screen === 'monitoring_membership_confirmation') {
-    return (
-      <MonitorApp
-        sidebarCard={
-          <div className="mc t1">
-            <div className="mc-plan">{plan} plan</div>
-            <div className="mc-cap">Free trial · <b>14 days left</b></div>
-            <button className="mc-btn-dark" onClick={() => { setScreen('pricing'); setShowModal(true); }}>Subscribe</button>
-          </div>
-        }
-        overlay={showModal ? (
-          <div className="tw-overlay">
-            <div className="tw-dim"></div>
-            <div className="tw-modal">
-              <div className="tw-badge">{CheckBlue}</div>
-              <div className="tw-eyebrow">{plan.toUpperCase()} PLAN · FREE TRIAL</div>
-              <h2>You're all set — welcome to Civic Lens</h2>
-              <p>You're trying the <b>{plan} plan</b> free — full access to every feature, with no payment required. Your trial runs for 14 days and ends on <b>June 16, 2026</b>.</p>
-              <div className="tw-meter">
-                <div className="tw-meter-row"><span>Day 1 of 14</span><span>14 days left</span></div>
-                <div className="tw-meter-bar"><div className="tw-meter-fill" style={{ width: '7%' }}></div></div>
-              </div>
-              <div className="tw-actions">
-                <button className="tw-btn-primary" onClick={() => setShowModal(false)}>Start exploring</button>
-                <a className="tw-link" onClick={() => { setScreen('pricing'); setShowModal(true); }}>See plans &amp; pricing</a>
-              </div>
-              <div className="tw-foot">We'll remind you before your trial ends. No charge until you choose a plan.</div>
-            </div>
-          </div>
-        ) : null}
-      />
-    );
-  }
-
-  // pricing screen
-  return (
-    <PricingPage
-      freeCallout={FreeCallout}
-      onSubscribe={goConfirmation}
-      onGetStarted={() => window.scrollTo(0, 0)}
-    />
-  );
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(<Prototype />);
-</script>
+</div>
 </body>
 </html>
