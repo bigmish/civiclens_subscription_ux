@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Screen Inventory</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #F7F6F2;
+  color: #1C1C1C;
+  line-height: 1.5;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 56px 120px;
+}
+
+/* — Page Header — */
+.page-header {
+  border-bottom: 1px solid #E0DED9;
+  padding-bottom: 48px;
+  margin-bottom: 0;
+}
+.page-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #A0A09A;
+  margin-bottom: 16px;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 52px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  color: #1C1C1C;
+}
+.page-subtitle {
+  font-size: 15px;
+  color: #686865;
+  max-width: 560px;
+  line-height: 1.65;
+}
+
+/* — Essential Needs — */
+.needs-section {
+  padding: 40px 0;
+  border-bottom: 1px solid #E0DED9;
+}
+.needs-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #A0A09A;
+  margin-bottom: 20px;
+}
+.needs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.need-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.need-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  color: #D8D6D1;
+  line-height: 1;
+}
+.need-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1C1C1C;
+  line-height: 1.3;
+}
+.need-desc {
+  font-size: 12px;
+  color: #686865;
+  line-height: 1.55;
+}
+
+/* — Legend — */
+.legend {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-bottom: 1px solid #E0DED9;
+  margin-bottom: 0;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #686865;
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* — Entry — */
+.entry {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 64px;
+  padding: 64px 0;
+  border-bottom: 1px solid #E0DED9;
+  align-items: start;
+}
+
+.entry-meta {}
+
+.entry-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.entry-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C4C2BC;
+}
+.entry-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  line-height: 1.1;
+}
+.entry-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  border: 1px solid #D8D6D1;
+  border-radius: 3px;
+  padding: 3px 7px;
+  margin-bottom: 24px;
+}
+.entry-approach {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #1C1C1C;
+  line-height: 1.5;
+  padding: 14px 16px;
+  background: #EDECEA;
+  border-left: 3px solid #1C1C1C;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 24px;
+}
+
+/* — Needs Evaluation (per entry) — */
+.needs-eval {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.need-row {
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.need-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.need-status.yes  { background: #2D9E5F; }
+.need-status.part { background: #C48A00; }
+.need-status.no   { background: #D4D2CD; }
+.need-row-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 2px;
+}
+.need-row-text {
+  font-size: 13px;
+  color: #535350;
+  line-height: 1.5;
+}
+.verdict {
+  border-left: 3px solid #CCCAC5;
+  padding: 12px 14px;
+  border-radius: 0 4px 4px 0;
+  background: #EDECEA;
+}
+.verdict-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 4px;
+}
+.verdict-text {
+  font-size: 13px;
+  color: #3A3A37;
+  line-height: 1.55;
+}
+
+/* — Browser Frame — */
+.browser-frame {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.05);
+}
+.browser-bar {
+  background: #E9E9E9;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.b-dot { width: 10px; height: 10px; border-radius: 50%; }
+.b-dot.r { background: #FC5F5A; }
+.b-dot.y { background: #FEBC2E; }
+.b-dot.g { background: #28C840; }
+.b-url {
+  flex: 1;
+  margin: 0 8px;
+  background: #F2F2F2;
+  border-radius: 4px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 10px;
+  font-family: monospace;
+  color: #999;
+}
+.browser-content {
+  position: relative;
+}
+
+/* =========================================
+   1. AIRTABLE
+   ========================================= */
+.mock-airtable {
+  background: linear-gradient(150deg, #fce8df 0%, #f8ece0 40%, #f0e0ec 100%);
+  padding: 40px 44px 44px;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.at-logo {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 8px);
+  grid-template-rows: repeat(3, 8px);
+  gap: 3px;
+}
+.at-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(180,60,90,0.35);
+}
+.at-dot.empty { background: transparent; }
+.at-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  line-height: 1.2;
+  color: #1C1C1C;
+  margin-bottom: 14px;
+}
+.at-body {
+  font-size: 12px;
+  color: #4A4040;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  max-width: 340px;
+}
+.at-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2A2020;
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+.at-input {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(180,130,130,0.3);
+  border-radius: 6px;
+  padding: 0 10px 0 14px;
+  height: 40px;
+  max-width: 360px;
+}
+.at-input-text { flex: 1; font-size: 12px; color: #C0B0B0; }
+.at-input-btn {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #3a3030;
+  display: flex; align-items: center; justify-content: center;
+}
+.at-input-btn svg { width: 12px; height: 12px; }
+
+/* =========================================
+   2. NOTION
+   ========================================= */
+.mock-notion {
+  background: #FFFFFF;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.notion-nav {
+  height: 44px;
+  border-bottom: 1px solid #EBEBEB;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 8px;
+}
+.notion-logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1C1C1C;
+  font-family: serif;
+}
+.notion-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  text-align: center;
+}
+.notion-step {
+  font-size: 10px;
+  color: #B0B0B0;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.notion-h {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1C1C1C;
+  margin-bottom: 8px;
+  line-height: 1.25;
+  font-family: 'DM Sans', sans-serif;
+}
+.notion-sub {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 24px;
+}
+.notion-cards {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+.notion-card {
+  flex: 1;
+  max-width: 120px;
+  border: 1.5px solid #E8E8E8;
+  border-radius: 8px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.notion-card:hover { border-color: #1C1C1C; }
+.notion-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.notion-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1C1C1C;
+  text-align: center;
+}
+.notion-card-sub {
+  font-size: 10px;
+  color: #999;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* =========================================
+   3. FIGMA
+   ========================================= */
+.mock-figma {
+  background: #1E1E1E;
+  min-height: 340px;
+  display: flex;
+}
+.figma-sidebar {
+  width: 220px;
+  background: #2C2C2C;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 0;
+}
+.figma-sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px 14px;
+  border-bottom: 1px solid #383838;
+}
+.figma-logo {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.fg { width: 10px; height: 14px; border-radius: 5px 5px 0 0; }
+.fg.r { background: #F24E1E; }
+.fg.o { background: #FF7262; }
+.fg.p { background: #A259FF; }
+.fg.b { background: #1ABCFE; }
+.fg.g { background: #0ACF83; }
+.figma-workspace-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #E0E0E0;
+}
+.figma-nav-item {
+  padding: 6px 14px;
+  font-size: 11px;
+  color: #A0A0A0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.figma-nav-item.active {
+  background: #383838;
+  color: #FFFFFF;
+}
+.figma-nav-dot {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  background: #505050;
+  flex-shrink: 0;
+}
+.figma-main {
+  flex: 1;
+  background: #1E1E1E;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.figma-files-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #E8E8E8;
+  margin-bottom: 14px;
+}
+.figma-files-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  opacity: 0.4;
+}
+.figma-file-card {
+  background: #2C2C2C;
+  border-radius: 6px;
+  height: 70px;
+}
+.figma-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.figma-modal {
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 24px;
+  width: 240px;
+  text-align: center;
+}
+.figma-modal-logo {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+.fml { width: 10px; height: 14px; border-radius: 5px; }
+.figma-modal h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1C1C1C;
+  margin-bottom: 6px;
+}
+.figma-modal p {
+  font-size: 11px;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.figma-modal-btn {
+  width: 100%;
+  background: #1C1C1C;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 6px;
+}
+.figma-modal-skip {
+  font-size: 11px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* =========================================
+   4. SLACK
+   ========================================= */
+.mock-slack {
+  background: #FFFFFF;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+.slack-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+.slack-icon {
+  width: 32px; height: 32px;
+}
+.slack-wordmark {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1D1C1D;
+  letter-spacing: -0.5px;
+}
+.slack-steps {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.slack-step {
+  width: 24px; height: 4px;
+  border-radius: 2px;
+  background: #E0DDE8;
+}
+.slack-step.done { background: #611F69; }
+.slack-step.active { background: #7C3085; }
+.slack-h {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1D1C1D;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.slack-sub {
+  font-size: 12px;
+  color: #616061;
+  margin-bottom: 24px;
+  max-width: 280px;
+}
+.slack-input {
+  width: 100%;
+  max-width: 340px;
+  border: 1.5px solid #D0CADB;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #1D1C1D;
+  margin-bottom: 12px;
+}
+.slack-btn {
+  width: 100%;
+  max-width: 340px;
+  background: #611F69;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* =========================================
+   5. HUBSPOT
+   ========================================= */
+.mock-hubspot {
+  background: #FFFFFF;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.hubspot-nav {
+  height: 52px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E5E5;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.hubspot-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hubspot-sprocket {
+  width: 22px; height: 22px;
+  background: #FF7A59;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.hubspot-wordmark {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2D3748;
+}
+.hubspot-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 28px;
+}
+.hubspot-h {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2D3748;
+  margin-bottom: 4px;
+}
+.hubspot-sub {
+  font-size: 12px;
+  color: #718096;
+  margin-bottom: 20px;
+}
+.hubspot-progress-bar-bg {
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+.hubspot-progress-bar {
+  height: 100%;
+  width: 20%;
+  background: #FF7A59;
+  border-radius: 3px;
+}
+.hubspot-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hs-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+}
+.hs-step.active { border-color: #FF7A59; background: #FFF8F6; }
+.hs-step-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E0;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: #CBD5E0;
+  margin-top: 1px;
+}
+.hs-step-icon.done { border-color: #48BB78; background: #48BB78; color: #fff; }
+.hs-step-icon.active { border-color: #FF7A59; color: #FF7A59; }
+.hs-step-text {}
+.hs-step-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2D3748;
+  margin-bottom: 2px;
+}
+.hs-step-title.active { color: #E05A3A; }
+.hs-step-desc { font-size: 11px; color: #718096; }
+
+/* =========================================
+   6. MONDAY.COM
+   ========================================= */
+.mock-monday {
+  background: #F6F7FB;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.monday-nav {
+  height: 44px;
+  background: #292F4C;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+}
+.monday-logo-mark {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.monday-circle {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.monday-body {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.monday-h {
+  font-size: 18px;
+  font-weight: 700;
+  color: #323338;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.monday-sub {
+  font-size: 12px;
+  color: #676879;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.monday-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+.monday-item {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.monday-item:hover { border-color: #0073EA; }
+.monday-item-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.monday-item-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #323338;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* =========================================
+   7. GITHUB
+   ========================================= */
+.mock-github {
+  background: #FFFFFF;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.github-nav {
+  height: 52px;
+  background: #24292F;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+}
+.github-logo svg { width: 22px; height: 22px; fill: #fff; }
+.github-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 32px;
+  text-align: center;
+}
+.github-progress {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+.github-prog-step {
+  width: 18px; height: 4px;
+  border-radius: 2px;
+  background: #E1E4E8;
+}
+.github-prog-step.done { background: #1A7F37; }
+.github-prog-step.active { background: #0969DA; }
+.github-h {
+  font-size: 18px;
+  font-weight: 700;
+  color: #24292F;
+  margin-bottom: 6px;
+}
+.github-sub {
+  font-size: 12px;
+  color: #57606A;
+  margin-bottom: 20px;
+}
+.github-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 340px;
+}
+.github-role {
+  border: 1.5px solid #D0D7DE;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #24292F;
+  cursor: pointer;
+}
+.github-role.selected {
+  border-color: #0969DA;
+  background: #DDF4FF;
+  color: #0969DA;
+}
+.github-continue {
+  margin-top: 20px;
+  background: #1A7F37;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================
+   8. LINEAR
+   ========================================= */
+.mock-linear {
+  background: #101012;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.linear-card {
+  background: #1A1A1E;
+  border: 1px solid #2A2A2E;
+  border-radius: 12px;
+  padding: 32px 36px;
+  width: 300px;
+  text-align: center;
+}
+.linear-logo {
+  width: 36px; height: 36px;
+  margin: 0 auto 18px;
+}
+.linear-h {
+  font-size: 16px;
+  font-weight: 600;
+  color: #E8E8EC;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+.linear-sub {
+  font-size: 11px;
+  color: #606068;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+.linear-field-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #88888F;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.linear-input {
+  width: 100%;
+  background: #111113;
+  border: 1px solid #2E2E34;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #E0E0E5;
+  margin-bottom: 14px;
+}
+.linear-url-hint {
+  font-size: 10px;
+  color: #44444A;
+  text-align: left;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-family: monospace;
+}
+.linear-btn {
+  width: 100%;
+  background: #5B5BD6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================
+   9. WEBFLOW
+   ========================================= */
+.mock-webflow {
+  background: #0A0F1E;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px;
+  text-align: center;
+}
+.webflow-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.webflow-logo-mark {
+  width: 28px; height: 28px;
+  background: #146EF5;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+}
+.webflow-wordmark {
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+.webflow-h {
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+.webflow-sub {
+  font-size: 12px;
+  color: #8896B0;
+  margin-bottom: 24px;
+}
+.webflow-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+.webflow-option {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 8px;
+  padding: 14px 18px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.webflow-option:hover { border-color: #146EF5; background: rgba(20,110,245,0.1); }
+.webflow-opt-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.webflow-opt-sub {
+  font-size: 10px;
+  color: #6680A0;
+}
+
+/* =========================================
+   10. JIRA
+   ========================================= */
+.mock-jira {
+  background: #FFFFFF;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.jira-nav {
+  height: 44px;
+  background: #0052CC;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+}
+.jira-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.jira-logo-icon {
+  width: 22px; height: 22px;
+}
+.jira-wordmark {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.jira-body {
+  flex: 1;
+  padding: 24px;
+}
+.jira-h {
+  font-size: 16px;
+  font-weight: 700;
+  color: #172B4D;
+  margin-bottom: 4px;
+}
+.jira-sub {
+  font-size: 11px;
+  color: #626F86;
+  margin-bottom: 16px;
+}
+.jira-templates {
+  display: flex;
+  gap: 10px;
+}
+.jira-tmpl {
+  flex: 1;
+  border: 1.5px solid #DFE1E6;
+  border-radius: 6px;
+  padding: 14px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+.jira-tmpl:hover { border-color: #0052CC; }
+.jira-tmpl.selected { border-color: #0052CC; background: #F0F5FF; }
+.jira-tmpl-icon {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.jira-tmpl-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #172B4D;
+}
+.jira-tmpl-desc {
+  font-size: 10px;
+  color: #626F86;
+  line-height: 1.3;
+}
+.jira-next-btn {
+  display: inline-block;
+  margin-top: 16px;
+  background: #0052CC;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="page-eyebrow">Competitive Audit · June 2026</p>
+    <h1 class="page-title">First Screen Inventory</h1>
+    <p class="page-subtitle">How 10 complex, high-volume products introduce their value to users who may not yet know what the product can do — or how to use it.</p>
+  </header>
+
+  <!-- ESSENTIAL NEEDS -->
+  <div class="needs-section">
+    <div class="needs-label">Five essential needs of a first screen</div>
+    <div class="needs-grid">
+      <div class="need-item">
+        <div class="need-num">1</div>
+        <div class="need-title">Fit Confirmation</div>
+        <div class="need-desc">"Is this for me?" — the user needs to quickly recognise that this product is relevant to their context before investing any setup energy.</div>
+      </div>
+      <div class="need-item">
+        <div class="need-num">2</div>
+        <div class="need-title">Value Comprehension</div>
+        <div class="need-desc">"What will I be able to do?" — the screen should communicate a concrete outcome the user can expect, not just a feature list.</div>
+      </div>
+      <div class="need-item">
+        <div class="need-num">3</div>
+        <div class="need-title">Path to Value</div>
+        <div class="need-desc">"How long before I see results?" — users are doing a subconscious ROI calculation. The screen should signal that the payoff is near.</div>
+      </div>
+      <div class="need-item">
+        <div class="need-num">4</div>
+        <div class="need-title">Clear First Action</div>
+        <div class="need-desc">"What do I do right now?" — one unambiguous step forward, low enough friction that the user acts without overthinking.</div>
+      </div>
+      <div class="need-item">
+        <div class="need-num">5</div>
+        <div class="need-title">Permission to Explore</div>
+        <div class="need-desc">"Can I skip this and come back?" — expert and returning users need an escape hatch. Forcing a linear path alienates the already-converted.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#2D9E5F"></span> Addresses this need</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#C48A00"></span> Partially addresses</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#D4D2CD"></span> Does not address</div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 1: AIRTABLE
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">01</span>
+        <h2 class="entry-name">Airtable</h2>
+      </div>
+      <span class="entry-tag">AI Personalization Wizard</span>
+      <div class="entry-approach">Leads with an AI assistant persona — "Omni" — before the user sees any product UI. Context collection happens through conversation.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">Asking for company name and role implies business users, but doesn't confirm product relevance before the user commits to the form.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">"I'll create powerful tools, get insights, and automate your work" directly names outcomes. The AI framing signals intelligent automation, not just a spreadsheet replacement.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">No indication of how long setup takes or when the user will see their first useful result. The wizard extends before the product is revealed.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">A single labeled input with one button. The path forward is completely unambiguous — the best clarity of action in the set.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">No skip or bypass available. The wizard must be completed before the user sees any product UI.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Strong clarity of action and solid value framing, but the sequence is inverted — users commit before they've seen anything. Works best when Airtable is already a trusted brand at the decision point.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">airtable.com/onboarding</div>
+        </div>
+        <div class="browser-content mock-airtable">
+          <div class="at-logo">
+            <div class="at-dot"></div><div class="at-dot"></div><div class="at-dot empty"></div>
+            <div class="at-dot"></div><div class="at-dot empty"></div><div class="at-dot"></div>
+            <div class="at-dot empty"></div><div class="at-dot"></div><div class="at-dot"></div>
+          </div>
+          <div class="at-h1">I'm Omni, your Airtable<br>data analyst</div>
+          <p class="at-body">Together, we'll create powerful tools to streamline your workflow. I can also help you get insights from your data, research the web, and automate your work in new ways.</p>
+          <p class="at-body">To get you going quickly, I'll suggest a few ideas based on your business and role.</p>
+          <div class="at-label">First, where do you work?</div>
+          <div class="at-input">
+            <span class="at-input-text">Company name</span>
+            <div class="at-input-btn">
+              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 2: NOTION
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">02</span>
+        <h2 class="entry-name">Notion</h2>
+      </div>
+      <span class="entry-tag">Use-Case Survey → Live Document</span>
+      <div class="entry-approach">A brief role-selection survey routes users into a personalized "Getting Started" page — which itself demonstrates Notion's format through hands-on exploration.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">The use-case cards (For myself / For my team / For my company) let users self-identify their context directly before setup begins.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">The Getting Started page is itself a Notion document — users grasp the product's format by experiencing it, not reading about it. Shown, not explained.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">Personalized templates give a sense of what's possible quickly, but there's no explicit signal of how fast a useful workspace can be built.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">One choice to make (use case), then a live document to explore. Low ambiguity at each step — the first action is the product itself.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">No forced tour. After the brief survey, users move at their own pace through a fully functional document. Freedom from minute one.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">One of the strongest performances in the set. The live-document approach elegantly solves the blank-canvas problem, and the survey personalizes without overwhelming. The one gap: the survey assumes you already know what Notion is.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">notion.so/onboarding</div>
+        </div>
+        <div class="browser-content mock-notion">
+          <div class="notion-nav">
+            <div class="notion-logo">𝒩</div>
+            <span style="font-size:11px;color:#999;margin-left:4px;">notion</span>
+          </div>
+          <div class="notion-body">
+            <div class="notion-step">Step 1 of 3</div>
+            <div class="notion-h">How are you planning to use<br>Notion?</div>
+            <div class="notion-sub">We'll set up your workspace based on your answer.</div>
+            <div class="notion-cards">
+              <div class="notion-card">
+                <div class="notion-icon" style="background:#F5F5F5;">👤</div>
+                <div class="notion-card-label">For myself</div>
+                <div class="notion-card-sub">Notes, tasks, personal projects</div>
+              </div>
+              <div class="notion-card">
+                <div class="notion-icon" style="background:#EEF3FF;">👥</div>
+                <div class="notion-card-label">For my team</div>
+                <div class="notion-card-sub">Wikis, docs, projects</div>
+              </div>
+              <div class="notion-card">
+                <div class="notion-icon" style="background:#FFF4EE;">🏢</div>
+                <div class="notion-card-label">For my company</div>
+                <div class="notion-card-sub">Company-wide knowledge base</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 3: FIGMA
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">03</span>
+        <h2 class="entry-name">Figma</h2>
+      </div>
+      <span class="entry-tag">Dashboard + Opt-in Tour Modal</span>
+      <div class="entry-approach">Drops users directly into the real product — a dashboard of files — and offers an optional guided tour. Expert users can skip immediately; newcomers are offered a structured walkthrough.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">No fit check. The empty dashboard assumes users know they belong here. Someone unfamiliar with design tools gets no signal that Figma is for them.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">The welcome modal briefly differentiates Figma from competitors ("key differences from other tools"), but for users who've never used a design tool, the product's potential remains abstract.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">After the modal, there's no indication of how long it takes to create something meaningful, or what a "win" looks like on day one.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">The modal offers a single binary choice: take the tour or skip. Low friction, immediately actionable — the best aspect of this first screen.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">The opt-in tour is a textbook example of respecting the user's existing knowledge. Expert users dismiss and start immediately; newcomers can choose the guided path.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Highly respectful of experienced users, but leaves newcomers without scaffolding. Closing the modal reveals an empty dashboard with no obvious next step — the gap between "welcome" and "create" is unbridged.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">figma.com/files</div>
+        </div>
+        <div class="browser-content mock-figma">
+          <div class="figma-sidebar">
+            <div class="figma-sidebar-top">
+              <div class="figma-logo">
+                <div class="fg r" style="border-radius:5px 5px 0 5px;height:10px;width:7px;"></div>
+                <div class="fg o" style="border-radius:0 5px 5px 0;height:10px;width:7px;background:#FF7262;"></div>
+              </div>
+              <span class="figma-workspace-name">My Workspace</span>
+            </div>
+            <div style="height:10px;"></div>
+            <div class="figma-nav-item active"><div class="figma-nav-dot" style="background:#5B5BD6;"></div>Recents</div>
+            <div class="figma-nav-item"><div class="figma-nav-dot"></div>Drafts</div>
+            <div class="figma-nav-item"><div class="figma-nav-dot"></div>Community</div>
+            <div style="height:16px;border-top:1px solid #383838;margin-top:8px;padding-top:8px;"></div>
+            <div class="figma-nav-item" style="opacity:0.4;"><div class="figma-nav-dot"></div>No teams yet</div>
+          </div>
+          <div class="figma-main">
+            <div class="figma-files-header">Recent files</div>
+            <div class="figma-files-grid">
+              <div class="figma-file-card"></div>
+              <div class="figma-file-card"></div>
+              <div class="figma-file-card"></div>
+              <div class="figma-file-card"></div>
+              <div class="figma-file-card"></div>
+              <div class="figma-file-card"></div>
+            </div>
+            <div class="figma-modal-overlay">
+              <div class="figma-modal">
+                <div class="figma-modal-logo">
+                  <div class="fml" style="background:#F24E1E;"></div>
+                  <div class="fml" style="background:#FF7262;"></div>
+                  <div class="fml" style="background:#A259FF;"></div>
+                </div>
+                <h3>Welcome to Figma</h3>
+                <p>There are some key differences from other design tools. Take a quick tour to get up to speed.</p>
+                <button class="figma-modal-btn">Start tour →</button>
+                <div class="figma-modal-skip">Skip for now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 4: SLACK
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">04</span>
+        <h2 class="entry-name">Slack</h2>
+      </div>
+      <span class="entry-tag">Workspace Setup Wizard</span>
+      <div class="entry-approach">New workspace creators go through a step-by-step setup flow collecting team name, use case, and teammate invitations — before entering the actual product.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">The workspace naming screen assumes commitment without showing the product. Users are asked to name something they haven't yet seen.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">The product is completely invisible during setup. No channels, no messages, no conversation — until the wizard is complete there is nothing to evaluate.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">Three steps, then a first message sent. The wizard is short and culminates in a direct activation moment — the user experiences the product working almost immediately.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">A single field at each step with clear forward momentum. The progression is unambiguous — one of the cleanest step-by-step flows in the set.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">No skip option during setup. Notably, invitees — the majority of real new users — encounter an entirely different, much less guided entry path with no wizard at all.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Exceptionally well-paced once the user is committed, but the pre-show ask is a gamble — users configure before experiencing anything. Works because Slack's brand is already trusted at the decision point.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">slack.com/create</div>
+        </div>
+        <div class="browser-content mock-slack">
+          <div class="slack-logo">
+            <svg class="slack-icon" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.5 21.2c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4h4v4z" fill="#E01E5A"/>
+              <path d="M10.6 21.2c0-2.2 1.8-4 4-4s4 1.8 4 4v10c0 2.2-1.8 4-4 4s-4-1.8-4-4v-10z" fill="#E01E5A"/>
+              <path d="M14.6 8.5c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4v4h-4z" fill="#36C5F0"/>
+              <path d="M14.6 10.6c2.2 0 4 1.8 4 4s-1.8 4-4 4H4.6c-2.2 0-4-1.8-4-4s1.8-4 4-4h10z" fill="#36C5F0"/>
+              <path d="M27.5 14.6c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4h-4v-4z" fill="#2EB67D"/>
+              <path d="M25.4 14.6c0 2.2-1.8 4-4 4s-4-1.8-4-4V4.6c0-2.2 1.8-4 4-4s4 1.8 4 4v10z" fill="#2EB67D"/>
+              <path d="M21.4 27.5c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4v-4h4z" fill="#ECB22E"/>
+              <path d="M21.4 25.4c-2.2 0-4-1.8-4-4s1.8-4 4-4h10c2.2 0 4 1.8 4 4s-1.8 4-4 4h-10z" fill="#ECB22E"/>
+            </svg>
+            <span class="slack-wordmark">slack</span>
+          </div>
+          <div class="slack-steps">
+            <div class="slack-step done"></div>
+            <div class="slack-step active"></div>
+            <div class="slack-step"></div>
+            <div class="slack-step"></div>
+          </div>
+          <div class="slack-h">What's the name of your<br>company or team?</div>
+          <div class="slack-sub">This will be the name of your Slack workspace — choose something your team will recognize.</div>
+          <input class="slack-input" type="text" placeholder="Ex: Acme Co. or Marketing Team" />
+          <button class="slack-btn">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 5: HUBSPOT
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">05</span>
+        <h2 class="entry-name">HubSpot</h2>
+      </div>
+      <span class="entry-tag">Setup Checklist</span>
+      <div class="entry-approach">Greets new users with a task-based checklist of setup steps — connect email, import contacts, create a deal — rather than the product UI. Progress drives forward momentum.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">No fit check. The checklist assumes the user is already a CRM user. It configures the product without confirming whether it's the right tool for their situation.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">Checklist items (contacts, deals, emails) implicitly map to CRM capabilities — but there's no explicit outcome framing. Users understand the inputs, not yet the results they'll get.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">The progress bar is explicit: 4 steps, 1 complete, 3 to go. Users have a clear mental model of what remains and a sense that the finish line is near.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">The active step is highlighted and labeled. No ambiguity about where to start — the checklist structure eliminates the "where do I even begin?" problem common in complex CRMs.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">Individual steps can be skipped or deferred, but the checklist frame itself is presented as mandatory scaffolding before the full product is accessible.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Excellent at eliminating the "where do I start?" problem through structure, but entirely task-oriented rather than outcome-oriented. Users leave the checklist knowing how to set up HubSpot — not what they'll actually be able to do with it.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">app.hubspot.com/getting-started</div>
+        </div>
+        <div class="browser-content mock-hubspot">
+          <div class="hubspot-nav">
+            <div class="hubspot-logo">
+              <div class="hubspot-sprocket">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <circle cx="6" cy="6" r="2.5" fill="#fff"/>
+                  <circle cx="6" cy="1.5" r="1" fill="#fff"/>
+                  <circle cx="6" cy="10.5" r="1" fill="#fff"/>
+                  <circle cx="1.5" cy="6" r="1" fill="#fff"/>
+                  <circle cx="10.5" cy="6" r="1" fill="#fff"/>
+                </svg>
+              </div>
+              <span class="hubspot-wordmark">HubSpot</span>
+            </div>
+          </div>
+          <div class="hubspot-body">
+            <div class="hubspot-h">Get started with HubSpot</div>
+            <div class="hubspot-sub">Complete these steps to set up your account and get value faster.</div>
+            <div class="hubspot-progress-bar-bg"><div class="hubspot-progress-bar"></div></div>
+            <div class="hubspot-steps">
+              <div class="hs-step" style="background:#F0FFF4;border-color:#48BB78;">
+                <div class="hs-step-icon done">✓</div>
+                <div class="hs-step-text"><div class="hs-step-title">Create your account</div><div class="hs-step-desc">Your workspace is ready</div></div>
+              </div>
+              <div class="hs-step active">
+                <div class="hs-step-icon active">→</div>
+                <div class="hs-step-text"><div class="hs-step-title active">Connect your email</div><div class="hs-step-desc">Track email opens and reply in HubSpot</div></div>
+              </div>
+              <div class="hs-step">
+                <div class="hs-step-icon">3</div>
+                <div class="hs-step-text"><div class="hs-step-title">Import your contacts</div><div class="hs-step-desc">Bring in your existing contacts</div></div>
+              </div>
+              <div class="hs-step">
+                <div class="hs-step-icon">4</div>
+                <div class="hs-step-text"><div class="hs-step-title">Create your first deal</div><div class="hs-step-desc">See your pipeline come to life</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 6: MONDAY.COM
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">06</span>
+        <h2 class="entry-name">Monday.com</h2>
+      </div>
+      <span class="entry-tag">Template Gallery</span>
+      <div class="entry-approach">"What would you like to manage?" — a use-case gallery of template categories displayed as visual tiles. Users select a domain and are dropped into a pre-populated board.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">The template gallery directly answers "is this for my team?" — 8 categories covering marketing, sales, HR, IT and more. Users recognise their context immediately.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">Visual template tiles communicate the product's range faster than any copy. Users see what a Monday board looks like — and what it can organise — before committing to setup.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">Selecting a template drops users into a pre-populated working board immediately — the fastest path to a useful state in this entire set. No blank canvas.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">A single selection from a gallery. The choice is clear and low stakes — the interface explicitly signals "you can always change this later."</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">Users can browse all categories freely before committing. The "Other" tile is a safety valve for edge cases and signals the system won't box you in.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">The strongest first screen of the set for value introduction. The template gallery solves fit confirmation, value comprehension, and fast activation simultaneously. The main risk is choice paralysis when too many templates look similar.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">monday.com/onboarding</div>
+        </div>
+        <div class="browser-content mock-monday">
+          <div class="monday-nav">
+            <div class="monday-logo-mark">
+              <div class="monday-circle" style="background:#F6416C;"></div>
+              <div class="monday-circle" style="background:#FFCF00;"></div>
+              <div class="monday-circle" style="background:#00CA72;"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:#fff;margin-left:4px;">monday</span>
+          </div>
+          <div class="monday-body">
+            <div class="monday-h">What would you like to manage?</div>
+            <div class="monday-sub">Choose a template to get started — you can always change this later.</div>
+            <div class="monday-grid">
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#FFF0E8;">📣</div>
+                <div class="monday-item-label">Marketing</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#E8F8F0;">📋</div>
+                <div class="monday-item-label">Projects</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#EBF2FF;">💼</div>
+                <div class="monday-item-label">Sales CRM</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#F9F0FF;">👥</div>
+                <div class="monday-item-label">HR</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#FFFBE8;">⚙️</div>
+                <div class="monday-item-label">IT &amp; Tech</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#FFF0F0;">🏗️</div>
+                <div class="monday-item-label">Operations</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#F0FFF8;">🎯</div>
+                <div class="monday-item-label">Goal Tracking</div>
+              </div>
+              <div class="monday-item">
+                <div class="monday-item-icon" style="background:#F5F5F5;">＋</div>
+                <div class="monday-item-label">Other</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 7: GITHUB
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">07</span>
+        <h2 class="entry-name">GitHub</h2>
+      </div>
+      <span class="entry-tag">Role &amp; Interest Personalization</span>
+      <div class="entry-approach">A short survey asking for role, experience level, and areas of interest — used to personalize the GitHub feed and surface relevant repositories and learning content.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">Role selection (Developer, Designer, Student, etc.) lets users self-identify, but the framing is about personalising a feed — not confirming whether GitHub is the right tool for this person's goals.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">The survey form shows nothing about what GitHub enables. A first-time user completing the form still has no concrete sense of what they can build, share, or collaborate on.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">After the survey, users land on a personalised feed — but there's no explicit path to the most common first action: creating a repository. The distance to "done" is unclear.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">Selecting a role chip and clicking Continue is simple and quick. The UI is clean and unambiguous at each step of the survey.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">The survey can be completed quickly, and the resulting dashboard is browsable — but there's no explicit "skip personalisation" option for users who just want to get to work.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Optimised for the already-converted. For developers who know GitHub, the personalisation is a useful nicety. For newcomers, the first screen provides no glimpse of the product's core value — collaborative code hosting — before asking for information.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">github.com/welcome</div>
+        </div>
+        <div class="browser-content mock-github">
+          <div class="github-nav">
+            <div class="github-logo">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </div>
+            <span style="font-size:12px;color:#8B949E;flex:1;padding-left:8px;">Search or jump to...</span>
+            <span style="font-size:12px;color:#fff;font-weight:600;">Sign out</span>
+          </div>
+          <div class="github-body">
+            <div class="github-progress">
+              <div class="github-prog-step done"></div>
+              <div class="github-prog-step active"></div>
+              <div class="github-prog-step"></div>
+            </div>
+            <div class="github-h">What kind of work do you do?</div>
+            <div class="github-sub">We'll personalize your experience based on your role and interests.</div>
+            <div class="github-roles">
+              <div class="github-role selected">Developer</div>
+              <div class="github-role">DevOps / SRE</div>
+              <div class="github-role">Security</div>
+              <div class="github-role">Data Science</div>
+              <div class="github-role">Designer</div>
+              <div class="github-role">Student</div>
+              <div class="github-role">Engineering manager</div>
+              <div class="github-role">Other</div>
+            </div>
+            <button class="github-continue">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 8: LINEAR
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">08</span>
+        <h2 class="entry-name">Linear</h2>
+      </div>
+      <span class="entry-tag">Minimal Workspace Creation</span>
+      <div class="entry-approach">A single dark screen: name your workspace, get a URL, continue. No survey, no tour, no explanation. Linear bets its users are technical enough to find their own way in.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">No explicit fit check. The dark minimalist aesthetic signals "developer tool" to the right audience, but makes no direct claim about who this is for or what problem it solves.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">Workspace creation communicates nothing about what Linear enables. Users name a workspace with no preview of what the product looks like or what their team can accomplish with it.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">No sense of setup time, what the product looks like, or what a team achieves in their first week. The payoff is entirely deferred until after workspace creation.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">A single text field, one button. The most friction-free first action in the entire set — perfectly aligned with Linear's "speed first" product philosophy.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">After workspace creation, users enter the product directly with no forced tour or wizard. Full freedom from the start — consistent with the tool's developer-first values.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">A deliberate bet on self-selection: Linear assumes its users are software engineers who already know what they want. This works within that audience but is entirely opaque outside it — Linear's exceptional speed and UX are invisible until you're already inside.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">linear.app/join</div>
+        </div>
+        <div class="browser-content mock-linear">
+          <div class="linear-card">
+            <svg class="linear-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4L36 20L20 36L4 4Z" fill="#5B5BD6"/>
+              <path d="M4 4L20 20L4 36" stroke="#4444AA" stroke-width="1" fill="none"/>
+            </svg>
+            <div class="linear-h">Create your workspace</div>
+            <div class="linear-sub">Where your team will plan, track, and ship software together.</div>
+            <div class="linear-field-label">Workspace name</div>
+            <input class="linear-input" type="text" placeholder="Acme Inc." />
+            <div class="linear-url-hint">linear.app/acme-inc</div>
+            <button class="linear-btn">Create workspace →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 9: WEBFLOW
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">09</span>
+        <h2 class="entry-name">Webflow</h2>
+      </div>
+      <span class="entry-tag">Use-Case Intent Selection</span>
+      <div class="entry-approach">"What are you here to do?" — three or four intent options that branch the experience before the user ever sees the designer. The goal: route users to the right template and starting context.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">Three intent options (Design a site / Build client projects / Explore &amp; learn) segment users by context and allow self-routing before any setup begins.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">The options name activities but don't show the visual designer — Webflow's most distinctive capability. Users choose a path without seeing where it leads or what they'll be able to create.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">No indication of setup time or what the user will be able to publish. The options promise directions but not destinations — the payoff is deferred with no timeline signal.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">Three clearly labelled choices with short descriptors. Simple decision, low stakes, with an explicit no-commitment escape hatch ("Explore &amp; learn").</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status yes"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">"Explore &amp; learn" is an explicit no-commitment option — respectful of users who aren't ready to commit to a project type and want to understand the tool first.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Smart routing that deserves credit, but Webflow's biggest wow moment — the visual designer — is entirely hidden behind the selection screen. Showing a preview of the designer within one of the option cards would dramatically improve value comprehension.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">webflow.com/dashboard/welcome</div>
+        </div>
+        <div class="browser-content mock-webflow">
+          <div class="webflow-logo">
+            <div class="webflow-logo-mark">W</div>
+            <span class="webflow-wordmark">Webflow</span>
+          </div>
+          <div class="webflow-h">What are you here to do?</div>
+          <div class="webflow-sub">We'll tailor your experience to help you get there faster.</div>
+          <div class="webflow-options">
+            <div class="webflow-option">
+              <div class="webflow-opt-title">Design &amp; launch a website</div>
+              <div class="webflow-opt-sub">Build visually, publish instantly</div>
+            </div>
+            <div class="webflow-option">
+              <div class="webflow-opt-title">Build client projects</div>
+              <div class="webflow-opt-sub">Freelancer or agency workflows</div>
+            </div>
+            <div class="webflow-option">
+              <div class="webflow-opt-title">Explore &amp; learn Webflow</div>
+              <div class="webflow-opt-sub">Tutorials, sandbox, community</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================
+       ENTRY 10: JIRA
+  ======================================= -->
+  <div class="entry">
+    <div class="entry-meta">
+      <div class="entry-header">
+        <span class="entry-num">10</span>
+        <h2 class="entry-name">Jira</h2>
+      </div>
+      <span class="entry-tag">Project Type &amp; Template Selection</span>
+      <div class="entry-approach">Asks users to create a project immediately by choosing a methodology — Scrum, Kanban, or Bug Tracking — with visual board previews. Structural commitment before any orientation.</div>
+      <div class="needs-eval">
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">1 · Fit Confirmation</div><div class="need-row-text">No fit check at all. Users are immediately asked to create a project with a methodology — with no framing of whether Jira is the right tool or whether it suits their team's way of working.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">2 · Value Comprehension</div><div class="need-row-text">Board preview thumbnails give a first glimpse of the product UI, but the abstract empty columns convey structure without conveying what a team achieves by using it.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">3 · Path to Value</div><div class="need-row-text">No indication of setup time, what a well-configured Jira looks like, or what the team will be able to do once the board is running. The payoff is entirely implicit.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status part"></div>
+          <div><div class="need-row-label">4 · Clear First Action</div><div class="need-row-text">The project type selection is visually clear, but "Scrum vs. Kanban" is methodology jargon. Teams without agile experience may feel paralysed by a choice they don't yet understand.</div></div>
+        </div>
+        <div class="need-row">
+          <div class="need-status no"></div>
+          <div><div class="need-row-label">5 · Permission to Explore</div><div class="need-row-text">No skip or browse option. Users must commit to a project methodology before accessing any other part of the product — a high-stakes decision made with no context.</div></div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-label">Overall verdict</div>
+        <div class="verdict-text">Designed for teams already familiar with agile — likely a migration from an older Jira version or a competitor. For genuine first-timers, the methodology-first approach creates a high-friction, jargon-heavy decision that sets the wrong tone for a tool meant to reduce complexity.</div>
+      </div>
+    </div>
+    <div class="entry-mockup">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div>
+          <div class="b-url">jira.atlassian.com/create-project</div>
+        </div>
+        <div class="browser-content mock-jira">
+          <div class="jira-nav">
+            <div class="jira-logo">
+              <svg class="jira-logo-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 2L2 11l4.5 4.5L11 11l4.5 4.5L20 11 11 2z" fill="#fff" opacity="0.9"/>
+                <path d="M11 11l4.5 4.5L20 11" fill="#4BADE8" opacity="0.8"/>
+              </svg>
+              <span class="jira-wordmark">Jira</span>
+            </div>
+            <span style="font-size:12px;color:rgba(255,255,255,0.7);margin-left:auto;">My projects</span>
+          </div>
+          <div class="jira-body">
+            <div class="jira-h">Create a new project</div>
+            <div class="jira-sub">Select a template that matches how your team works.</div>
+            <div class="jira-templates">
+              <div class="jira-tmpl selected">
+                <div class="jira-tmpl-icon" style="background:#E8F0FF;">🔄</div>
+                <div class="jira-tmpl-name">Scrum</div>
+                <div class="jira-tmpl-desc">Plan and work in sprints with a backlog</div>
+              </div>
+              <div class="jira-tmpl">
+                <div class="jira-tmpl-icon" style="background:#E8FFF0;">📌</div>
+                <div class="jira-tmpl-name">Kanban</div>
+                <div class="jira-tmpl-desc">Visualize and limit work in progress</div>
+              </div>
+              <div class="jira-tmpl">
+                <div class="jira-tmpl-icon" style="background:#FFF0E8;">🐛</div>
+                <div class="jira-tmpl-name">Bug Tracking</div>
+                <div class="jira-tmpl-desc">Manage and triage software bugs</div>
+              </div>
+            </div>
+            <button class="jira-next-btn">Select Scrum →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>
