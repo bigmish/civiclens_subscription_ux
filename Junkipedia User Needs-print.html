@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Junkipedia — User Needs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #F6F3EE;
+      --ink: #1C1917;
+      --ink-muted: #6B6560;
+      --ink-faint: #C4BDB5;
+      --rule: #E4DFDA;
+      --header-bg: #13111A;
+      --header-text: #F0EDE8;
+
+      --c1: #C05316; --c2: #9B6E00; --c3: #4A38C8; --c4: #B52828;
+      --c5: #197272; --c6: #2A7840; --c7: #1658A2; --c8: #6E28A8;
+
+      --c1-bg: #FDEEDD; --c2-bg: #FBF5D6; --c3-bg: #ECEAFF; --c4-bg: #FDEAEA;
+      --c5-bg: #D6F0F0; --c6-bg: #DAF0E2; --c7-bg: #D8E8FF; --c8-bg: #F0E4FF;
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* ── HEADER ── */
+    .doc-header { background: var(--header-bg); color: var(--header-text); padding: 72px 64px 56px; }
+    .doc-header-inner { max-width: 1000px; margin: 0 auto; }
+    .doc-label { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #8A8490; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .doc-label::before { content: ''; display: inline-block; width: 28px; height: 1px; background: #8A8490; }
+    .doc-header h1 { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; color: #F0EDE8; margin-bottom: 20px; }
+    .doc-header h1 span { color: #8B7EE8; }
+    .doc-header .subtitle { font-size: 17px; font-weight: 300; color: #A09AA8; max-width: 600px; line-height: 1.6; margin-bottom: 40px; text-wrap: pretty; }
+    .doc-meta { display: flex; gap: 36px; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-item .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6575; }
+    .meta-item .meta-value { font-size: 14px; font-weight: 500; color: #C8C2D0; }
+
+    /* ── PERSONA NAV ── */
+    .persona-nav { background: #1D1A27; padding: 0 64px; border-bottom: 1px solid #2A2636; position: sticky; top: 0; z-index: 10; }
+    .persona-nav-inner { max-width: 1000px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; scrollbar-width: none; }
+    .persona-nav-inner::-webkit-scrollbar { display: none; }
+    .persona-nav a { display: flex; align-items: center; gap: 8px; padding: 16px 18px 14px; text-decoration: none; color: #7C7888; font-size: 12px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    .persona-nav a:hover { color: #D0CCD8; }
+    .pi-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .pi-1 { background: var(--c1); } .pi-2 { background: var(--c2); } .pi-3 { background: var(--c3); }
+    .pi-4 { background: var(--c4); } .pi-5 { background: var(--c5); } .pi-6 { background: var(--c6); }
+    .pi-7 { background: var(--c7); } .pi-8 { background: var(--c8); }
+
+    /* ── BODY ── */
+    .doc-body { max-width: 1000px; margin: 0 auto; padding: 0 64px 96px; }
+    .section-rule { height: 1px; background: var(--ink-faint); margin: 64px 0 0; }
+
+    /* ── PERSONA SECTION ── */
+    .persona { padding: 56px 0 0; }
+    .persona-header { display: grid; grid-template-columns: 72px 1fr; gap: 0 24px; align-items: start; margin-bottom: 40px; }
+    .persona-number { font-family: var(--serif); font-size: 72px; font-weight: 600; line-height: 0.85; letter-spacing: -0.03em; padding-top: 6px; }
+    .persona-1 .persona-number { color: var(--c1); } .persona-2 .persona-number { color: var(--c2); }
+    .persona-3 .persona-number { color: var(--c3); } .persona-4 .persona-number { color: var(--c4); }
+    .persona-5 .persona-number { color: var(--c5); } .persona-6 .persona-number { color: var(--c6); }
+    .persona-7 .persona-number { color: var(--c7); } .persona-8 .persona-number { color: var(--c8); }
+
+    .persona-role-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; margin-bottom: 10px; }
+    .persona-1 .persona-role-tag { background: var(--c1-bg); color: var(--c1); }
+    .persona-2 .persona-role-tag { background: var(--c2-bg); color: var(--c2); }
+    .persona-3 .persona-role-tag { background: var(--c3-bg); color: var(--c3); }
+    .persona-4 .persona-role-tag { background: var(--c4-bg); color: var(--c4); }
+    .persona-5 .persona-role-tag { background: var(--c5-bg); color: var(--c5); }
+    .persona-6 .persona-role-tag { background: var(--c6-bg); color: var(--c6); }
+    .persona-7 .persona-role-tag { background: var(--c7-bg); color: var(--c7); }
+    .persona-8 .persona-role-tag { background: var(--c8-bg); color: var(--c8); }
+
+    .persona-name { font-family: var(--serif); font-size: clamp(24px, 3vw, 34px); font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: 8px; }
+    .persona-tagline { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-muted); line-height: 1.5; }
+
+    /* ── STORIES ── */
+    .stories { display: flex; flex-direction: column; padding-left: 96px; margin-top: 28px; }
+
+    /*
+      Story grid layout:
+      Row 1: .story-source  (spans both cols — no bottom rule)
+      Row 2: .story-trigger (col 1)  |  .story-body (col 2, "I want to…" only)
+      Row 3: .story-scenario (spans both cols)
+      Row 4: .story-criteria-wrap (spans both cols)
+    */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1.7fr;
+      column-gap: 48px;
+      row-gap: 20px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .story:last-child { border-bottom: none; }
+
+    /* Row 1 — source subhead, no trailing rule */
+    .story-source { grid-column: 1 / -1; }
+    .story-source-org { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 7px; line-height: 1.2; }
+    .story-source-quote { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-muted); line-height: 1.65; text-wrap: pretty; }
+
+    /* Row 2 — trigger + desire (auto-placed) */
+    .story-trigger { align-self: start; }
+    .story-body { align-self: start; }
+
+    .story-when { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+    .story-goal { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+
+    .story-want-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+    /* desire matches story-goal in font */
+    .story-desire { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+
+    /* Row 3 — scenario, full width */
+    .story-scenario { grid-column: 1 / -1; font-size: 14px; color: var(--ink-muted); line-height: 1.8; text-wrap: pretty; }
+
+    /* Row 4 — criteria, full width */
+    .story-criteria-wrap { grid-column: 1 / -1; }
+    .story-criteria-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+    .story-criteria { list-style: none; counter-reset: criteria; display: flex; flex-direction: column; gap: 7px; }
+    .story-criteria li { counter-increment: criteria; display: flex; gap: 10px; font-size: 13.5px; color: var(--ink); line-height: 1.5; align-items: baseline; }
+    .story-criteria li::before { content: counter(criteria); font-size: 10px; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; color: white; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; top: 1px; }
+    .persona-1 .story-criteria li::before { background: var(--c1); }
+    .persona-2 .story-criteria li::before { background: var(--c2); }
+    .persona-3 .story-criteria li::before { background: var(--c3); }
+    .persona-4 .story-criteria li::before { background: var(--c4); }
+    .persona-5 .story-criteria li::before { background: var(--c5); }
+    .persona-6 .story-criteria li::before { background: var(--c6); }
+    .persona-7 .story-criteria li::before { background: var(--c7); }
+    .persona-8 .story-criteria li::before { background: var(--c8); }
+
+    .story-note { font-size: 12.5px; color: var(--ink-muted); background: #F0ECE6; border-left: 3px solid var(--ink-faint); padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 14px; line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    .doc-footer { background: var(--header-bg); color: #5A5565; padding: 32px 64px; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; margin-top: 80px; }
+    .doc-footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 760px) {
+      .doc-header { padding: 48px 24px 40px; }
+      .persona-nav { padding: 0 16px; }
+      .doc-body { padding: 0 24px 64px; }
+      .stories { padding-left: 0; }
+      .persona-header { grid-template-columns: 52px 1fr; }
+      .persona-number { font-size: 52px; }
+      .story { grid-template-columns: 1fr; }
+      .doc-footer { padding: 24px; }
+    }
+  </style>
+
+  <style id="print-overrides">
+    @page {
+      size: A4 portrait;
+      margin: 1.4cm 1.6cm;
+    }
+
+    @media print {
+      *, *::before, *::after {
+        animation-delay: -99s !important;
+        animation-duration: .001s !important;
+        animation-iteration-count: 1 !important;
+        animation-fill-mode: both !important;
+        animation-play-state: running !important;
+        transition-duration: 0s !important;
+      }
+
+      html, body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Hide nav entirely */
+      .persona-nav { display: none !important; }
+
+      /* Header — compact so persona 1 fits on same page */
+      .doc-header {
+        padding: 20px 40px 16px;
+        break-after: avoid;
+        break-inside: avoid;
+      }
+      .doc-header h1 { font-size: 30px !important; margin-bottom: 8px; }
+      .doc-header .subtitle { font-size: 12.5px; margin-bottom: 14px; }
+      .doc-meta { gap: 20px; }
+      .meta-item .meta-value { font-size: 12px; }
+      .meta-item .meta-label { font-size: 9px; }
+      .doc-label { margin-bottom: 12px; }
+
+      .doc-body {
+        padding: 0 40px 48px;
+      }
+
+      /* Section divider + persona: always start a new page */
+      .section-rule {
+        display: none;
+      }
+      section.persona {
+        break-before: page;
+        padding-top: 32px;
+      }
+      section.persona:first-of-type {
+        break-before: auto !important;
+      }
+
+      /* Persona header: keep with first story */
+      .persona-header {
+        break-after: avoid;
+        margin-bottom: 24px;
+      }
+
+      /* Stories container */
+      .stories {
+        padding-left: 64px;
+        margin-top: 16px;
+      }
+
+      /* Each story: try to keep together; allow break if too long */
+      .story {
+        break-inside: avoid;
+        padding: 20px 0;
+      }
+
+      /* Scenario and criteria: keep together */
+      .story-scenario {
+        break-before: avoid;
+        break-inside: avoid;
+      }
+      .story-criteria-wrap {
+        break-inside: avoid;
+        break-before: avoid;
+      }
+
+      /* Story source: keep with what follows */
+      .story-source {
+        break-after: avoid;
+      }
+
+      /* Footer */
+      .doc-footer {
+        break-before: avoid;
+        padding: 20px 40px;
+        margin-top: 32px;
+      }
+
+      /* Tighten up spacing for print */
+      .doc-header h1 { font-size: 48px; }
+      .persona-name { font-size: 26px; }
+      .persona-number { font-size: 56px; }
+      .story-source-org { font-size: 15px; }
+      .story-source-quote { font-size: 13px; }
+      .story-goal { font-size: 16px; }
+      .story-desire { font-size: 16px; }
+      .story-scenario { font-size: 12.5px; line-height: 1.65; }
+      .story-criteria li { font-size: 12px; }
+      .story-note { font-size: 11px; }
+    }
+  </style>
+
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="doc-header-inner">
+    <div class="doc-label">Junkipedia &nbsp;·&nbsp; User Research</div>
+    <h1>User <span>Needs</span></h1>
+    <p class="subtitle" data-comment-anchor="3c91ed9c97-p">What 25 profiled users across journalism, academia, civil society, and government need to accomplish with Civic Lens — their goals, workflows, and the capabilities that support them.</p>
+    <div class="doc-meta">
+      <div class="meta-item"><span class="meta-label">Date</span><span class="meta-value">June 2026</span></div>
+      <div class="meta-item"><span class="meta-label">User Categories</span><span class="meta-value">8 types</span></div>
+      <div class="meta-item"><span class="meta-label">Profiled Users</span><span class="meta-value">25 people</span></div>
+      <div class="meta-item"><span class="meta-label">User Stories</span><span class="meta-value">20 scenarios</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="persona-nav">
+  <div class="persona-nav-inner">
+    <a href="#p1"><span class="pi-dot pi-1"></span>Journalism</a>
+    <a href="#p2"><span class="pi-dot pi-2"></span>Fact-Checking</a>
+    <a href="#p3"><span class="pi-dot pi-3"></span>Academic Research</a>
+    <a href="#p4"><span class="pi-dot pi-4"></span>Disinfo &amp; Influence Ops</a>
+    <a href="#p5"><span class="pi-dot pi-5"></span>Counter-Extremism</a>
+    <a href="#p6"><span class="pi-dot pi-6"></span>Civil Society</a>
+    <a href="#p7"><span class="pi-dot pi-7"></span>Election Integrity</a>
+    <a href="#p8"><span class="pi-dot pi-8"></span>Education &amp; Training</a>
+  </div>
+</nav>
+
+<main class="doc-body">
+
+  <!-- ── 1. JOURNALISM ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-1" id="p1">
+    <div class="persona-header">
+      <div class="persona-number">1</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Journalism &amp; Investigative Reporting</span>
+        <h2 class="persona-name">The Political &amp; Documentary Journalist</h2>
+        <p class="persona-tagline">"I need to follow dozens of actors across platforms simultaneously — and build an organized record I can cite."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story" data-comment-anchor="d6feb9bd81-div">
+        <div class="story-source">
+          <div class="story-source-org">Politiken — Sofie</div>
+          <p class="story-source-quote">"I plan to use Junkipedia to monitor the cross-platform social media activity of Danish politicians, political parties, and affiliated advocacy groups. Specifically, I will use it as a primary tool during upcoming election campaigns to track political messaging, analyze digital campaign strategies, and identify potential misinformation."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">cover a multi-party election campaign across four platforms</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire" data-comment-anchor="8a4c6daad5-div">open one saved view each morning and see everything all parties posted in the last 24 hours, ranked by engagement</div>
+        </div>
+        <p class="story-scenario" data-comment-anchor="40326f5703-p">Sofie covers Danish national politics for Politiken and needs to follow all nine political parties across Facebook, X, TikTok, and Instagram simultaneously during the 2026 election campaign. Rather than spending the first two hours of every morning cycling through each party's profiles manually, she wants a single view showing what everyone posted yesterday, ranked by engagement, so she can spot which party is pushing which message and catch anything that looks misleading before it spreads.<br><br>Sofie creates an Actor Set called "Danish Folketing 2026" and adds social media accounts for all nine parties. She saves a Monitoring view filtered to that Actor Set with a rolling 24-hour date window as her morning dashboard. Each day she checks the breakdown-by-channel chart to see which parties are most active and on which platforms. When the Liberal Alliance posts a series of immigration statistics that look dubious, she creates a Post List called "LA immigration claims — June 2026" and saves those posts as source material while she investigates the numbers.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>One saved view shows all nine parties' posts from the last 24 hours, ranked by engagement, every morning</li>
+            <li>Breakdown chart reveals which party is most active and on which platform at a glance</li>
+            <li>A Post List captures the dubious posts as source material before investigating</li>
+            <li>She can filter to a single party or platform when a story requires deeper focus</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story" data-comment-anchor="51ab886ab1-div">
+        <div class="story-source">
+          <div class="story-source-org">Filmproduktion — Jonas</div>
+          <p class="story-source-quote">"I'm working on a long-term documentary about the current government. For this, we're closely following several politicians. To get an accurate picture, we need to track and document their social media activity. We're realising that, as a small team, we're reaching our limits doing this manually."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">produce a year-long documentary tracking specific politicians</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">have every post automatically archived and instantly retrievable by person, topic, and date — months after it was posted</div>
+        </div>
+        <p class="story-scenario">Jonas is a video journalist making a year-long documentary about the German federal government and is closely following five ministers. Right now someone on his small team manually saves screenshots and URLs each week, which takes hours and produces an inconsistent archive. Jonas needs a system that captures posts automatically and keeps them organized by politician and topic, so that months later in the edit suite they can find exactly what a specific minister said during a specific moment in the story.<br><br>Jonas creates a separate List for each of the five ministers and adds their accounts across X, Instagram, Facebook, and YouTube. He sets up Search Terms for the key policy themes of the documentary — housing, defense spending, coalition tensions. At major moments — a ministerial speech, a cabinet crisis, a controversial vote — Jonas creates a dated Post List, for example "Habeck — February Budget Statement," and labels posts with the documentary chapter they belong to. When the editor asks for everything Finance Minister Lindner said publicly about debt limits in Q1, Jonas filters to Lindner's List, sets the date range, and has the results in under a minute.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Every post from five ministers across all platforms is collected without manual gaps</li>
+            <li>A dated Post List preserves the full context of a specific news cycle intact for the edit suite</li>
+            <li>Posts labeled with documentary chapter names let the edit team pull all "coalition tensions" material in one search</li>
+            <li>Any minister's posts from a specific week surface in under a minute on short notice</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Kobalt Documentary GmbH — Lena</div>
+          <p class="story-source-quote">"I will use Junkipedia to track, collect, and analyse relevant social media accounts across multiple platforms…to compare messaging on the same topics across different platforms."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">research how different groups frame the same policy issue</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">run the same keyword search across multiple actor groups and see the framing divergences side by side</div>
+        </div>
+        <p class="story-scenario">Lena is a documentary researcher at Kobalt working on a film about how different actor groups — politicians, aligned media, and advocacy organizations — frame the same policy issues differently. She needs to run the same search against multiple separate actor groups simultaneously and see the divergences: who uses which language, which platforms they choose, how their engagement compares. Right now she does this by opening separate browser tabs and manually comparing, which is slow and produces no organized record.<br><br>Lena creates three parallel Lists: "German Politicians — Climate," "German Media — Climate," and "Climate Advocacy Groups." When a major climate policy announcement drops, she searches the same keyword across all three Lists and opens the breakdown chart for each group. She labels posts by framing type — "economic burden," "techno-optimist," "alarmist," "policy-focused" — using a Labelling Exercise. She exports the labeled CSV for the production team's script researcher and uses the breakdown charts as a guide for interview question development.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>The same keyword search runs against three Lists and returns comparable results in one session</li>
+            <li>Frequency differences in specific terms are measurable — politicians used "energy transition" 40 times, advocacy groups used "climate emergency" 80 times</li>
+            <li>200 posts labeled across all three groups with a custom typology export cleanly to CSV</li>
+            <li>The most-engaged post from each actor group on the same topic surfaces in under five minutes</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 2. FACT-CHECKING ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-2" id="p2">
+    <div class="persona-header">
+      <div class="persona-number">2</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Fact-Checking &amp; Claim Verification</span>
+        <h2 class="persona-name">The Fact-Checker</h2>
+        <p class="persona-tagline">"I need to catch false claims while they're still small — and run a team verification workflow without email chains."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Factcheck.Vlaanderen — Pieter</div>
+          <p class="story-source-quote">"Our primary aim is to use it to track and collect trending claims across various platforms so that we can verify them. We will also use it for a broader analysis of news reports and misinformation."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">monitor for trending false claims each morning</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">surface viral misinformation early enough to publish a rebuttal while it still matters</div>
+        </div>
+        <p class="story-scenario">Pieter is the lead fact-checker at Factcheck.Vlaanderen and needs to catch viral false claims before they peak so his team can publish a rebuttal while it still matters. Currently the team manually scrolls Flemish Facebook groups and X each morning, meaning they often catch stories too late. He wants a system that surfaces trending misinformation early, routes claims to specific team members, and maintains a record of what they've already checked.<br><br>Pieter creates Search Terms for recurring Belgian misinformation keywords — politicians' names paired with common false allegations, immigration statistics, vaccine side effect terms. Each morning he checks the Monitoring feed sorted by engagement to see what's gaining traction. When a post about a false crime statistic crosses 500 shares, he adds it to a Post List called "Claims Queue" while it's still well under 1,000 — before it reaches the mainstream press.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>A trending false claim is identified while still under 1,000 shares — before it peaks</li>
+            <li>All instances of that claim across Facebook and X surface in one view, ordered by engagement</li>
+            <li>The Claims Queue Post List at month's end shows every claim flagged in June with context intact</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Factcheck.Vlaanderen — Pieter</div>
+          <p class="story-source-quote">"Our primary aim is to use it to track and collect trending claims across various platforms so that we can verify them. We will also use it for a broader analysis of news reports and misinformation."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">need to assign a claim to a team member and track its progress</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">run the full verification workflow — from queue to verdict — inside the platform, without email back-and-forth</div>
+        </div>
+        <p class="story-scenario">Pieter needs a system that surfaces trending misinformation early, routes claims to specific team members, and maintains a record of what they've already checked — without email chains or manual coordination overhead.<br><br>Once a claim lands in the Claims Queue, Pieter creates a Labelling Exercise with a codebook of verdict statuses: "source verified," "claim confirmed false," "misleading context," "true." He assigns the claim to the appropriate team member directly. After verification, the label is updated and the completed entry moves to the archive. At any moment he can see whether a specific claim is in-queue, verified, or not yet flagged — without asking anyone.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Claims are assigned to specific team members via Labelling Exercise — no email needed</li>
+            <li>Verdict labels are updated in place; the full decision record stays attached to the original post</li>
+            <li>The team's output for any calendar month is visible in one filtered view with verdicts attached</li>
+            <li>He can tell at a glance whether a specific claim is in the queue, verified, or not yet flagged</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 3. ACADEMIC ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-3" id="p3">
+    <div class="persona-header">
+      <div class="persona-number">3</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Academic &amp; Scholarly Research</span>
+        <h2 class="persona-name">The Academic Researcher</h2>
+        <p class="persona-tagline">"I need systematic, gap-free data collection at scale — and a labeling pipeline that satisfies peer review."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">UKP Lab · TU Darmstadt — Lukas</div>
+          <p class="story-source-quote">"We want to utilize Junkipedia to access and archive social media posts, particularly those showcasing examples of misleading content…One of our goals is to scale up their study by collecting and analyzing charts on a broader range of topics."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">build a large labeled corpus for ML classifier training</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">collect thousands of candidate posts and run a multi-coder labeling exercise without coders stepping on each other's work</div>
+        </div>
+        <p class="story-scenario">Lukas leads a computational linguistics lab at TU Darmstadt studying how misleading data visualizations — fabricated charts, cherry-picked statistics, manipulated infographics — spread on social media. He needs a large, labeled corpus to train a classifier. Right now his team collects examples manually one by one, which doesn't scale. He needs a pipeline that collects thousands of candidate posts, labels them efficiently across multiple coders, and exports them in a format his Python ML pipeline can ingest.<br><br>Lukas creates Search Terms pairing data-visualization language — "Grafik zeigt," "data shows," "according to statistics" — with known misinformation topic keywords. The Monitoring feed collects candidate posts containing images across platforms. His three student coders work through a Labelling Exercise with a codebook for misleading visualization type: fabricated data, misleading axis, cherry-picked timeframe, out-of-context chart, genuine data. Lukas exports the labeled dataset via the API in JSON format and ingests it into his team's Python annotation pipeline.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>2,000 candidate posts collected via Search Terms within six weeks</li>
+            <li>Three coders work through the queue simultaneously without overlapping or duplicating annotations</li>
+            <li>Labeled dataset exported via API with all fields (text, image URL, label, timestamp, platform) the Python pipeline expects</li>
+            <li>Export filterable to a single label — e.g. pull only "fabricated data" posts for the first training run</li>
+          </ol>
+          <p class="story-note">⚠ Open question: confirm whether image <em>files</em> are retrievable via API, not just image URLs — for ML training this distinction matters.</p>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">University of Stirling — Fiona</div>
+          <p class="story-source-quote">"Systematic scraping of social media accounts of interest to us has been a practical challenge. Junkipedia appears to offer a great solution to this. One current project is aiming to map an EU wide policy coalition."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">map a cross-organizational messaging coalition for peer-reviewed publication</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">collect six months of posts from 150 organizations systematically — demonstrating to reviewers that it's not a selective sample</div>
+        </div>
+        <p class="story-scenario">Fiona is a communications researcher at the University of Stirling mapping a coalition of approximately 150 EU trade associations and industry lobbying organizations that appear to coordinate messaging on agricultural policy. She needs to collect their social media output systematically — not cherry-pick examples — and use that data to demonstrate that messaging clusters exist across organizations that don't formally coordinate. Her evidence has to be robust enough for peer review.<br><br>Fiona creates an Actor Set containing all 150 organizations' X, LinkedIn, and Facebook accounts. She sets a six-month date window and uses Search Terms for EU agricultural policy keywords — "Farm to Fork," "Common Agricultural Policy," "CAP reform," "pesticide regulation." The Monitoring dashboard shows her which organizations post most frequently on these topics. She runs a Labelling Exercise to classify messaging frame for each post — "economic burden," "food security," "environmental opportunity," "regulatory overreach" — and exports the full labeled dataset for Gephi network visualization and R topic modeling.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Six months of posts from all 150 organizations collected without manual per-account work</li>
+            <li>87 of 150 organizations used "regulatory burden" in February — a clustering pattern she can cite</li>
+            <li>Exported CSV includes every field her R model needs; collection provenance is documentable for reviewers</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">University of Konstanz — Katrin</div>
+          <p class="story-source-quote">"We are interested in analyzing social media platform's moderation of potentially harmful content such as misinformation or hate speech. Particularly, we plan to audit the content moderation of a selection of platforms."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">audit how consistently platforms moderate the same misinformation content</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">track which posts get removed by each platform and calculate time-to-removal from timestamped data</div>
+        </div>
+        <p class="story-scenario">Katrin is a media studies researcher at the University of Konstanz auditing how consistently different platforms moderate identical or near-identical pieces of misinformation. She needs to collect a corpus of posts containing known harmful content before those posts are removed, track which ones are eventually taken down by each platform, and build a dataset showing removal rates by platform and content type.<br><br>Katrin creates Search Terms for a defined set of health misinformation claims — specific COVID treatment myths, vaccine side effect fabrications — her team has already catalogued as definitively false. The platform collects posts matching those terms across Facebook, X, TikTok, and YouTube. Each post is labeled with content type via a Labelling Exercise. Her team manually checks a sample of posts weekly and records whether they're still accessible, updating a "moderation status" label. The timestamped export lets them calculate time-to-removal by platform and content type.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>500 posts matching defined misinformation claims collected within the first month</li>
+            <li>TikTok removed 68% of vaccine misinformation posts within 72 hours; Facebook removed 31% — derived from manually updated labels</li>
+            <li>Export includes post ID, platform, content type, moderation status, and both collection and status-update timestamps</li>
+            <li>The same collection process can be run six months later to measure whether removal rates changed</li>
+          </ol>
+          <p class="story-note">⚠ Note: the platform does not auto-detect post removals. This workflow requires ongoing weekly manual audits — budget researcher time throughout the study period.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 4. DISINFO ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-4" id="p4">
+    <div class="persona-header">
+      <div class="persona-number">4</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Disinformation &amp; Influence Operations</span>
+        <h2 class="persona-name">The Influence Operations Analyst</h2>
+        <p class="persona-tagline">"I need early warning on emerging narratives — and the evidence packages to brief partners fast."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">DisinfoWatch — Andrei</div>
+          <p class="story-source-quote">"To help monitor for emerging narratives, assess their impact and potential spread and to help anticipate where they may lead in order to warn our partners and stakeholders in media, government and vulnerable communities."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">monitor fringe channels for narratives about to hit mainstream media</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">detect fast-growing content early and send partners a shareable package before the narrative peaks — no login required</div>
+        </div>
+        <p class="story-scenario">Andrei is an analyst at DisinfoWatch and his job is early warning — catching emerging narratives before they reach mainstream audiences and briefing media and government partners while there's still time to respond. He needs a system that monitors fringe and secondary channels, surfaces fast-growing narratives automatically, and lets him package evidence quickly enough to brief partners before a narrative peaks.<br><br>Andrei creates Lists of Telegram channels, alternative news sites' social accounts, and secondary influencer accounts that historically serve as early amplification vectors. He sets engagement filters to surface fast-growing content — posts gaining significant reshares within 24 hours. When a narrative about a domestic government scandal starts spiking on Telegram, he creates a Post List called "Government scandal narrative — early spread" and builds a shareable dashboard showing the 7-day engagement curve. He sends the dashboard link to his media and government contacts with a brief annotation, two days before the narrative hits national news.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>A Telegram-originating narrative breaking 500 reshares in 24 hours is surfaced before mainstream coverage</li>
+            <li>Dashboard shows the full engagement curve from day one to present in one view</li>
+            <li>Dashboard link opens for contacts without requiring them to create an account</li>
+            <li>New narratives can be compared against labeled Post Lists from prior cycles to spot recurrence</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">PROMPT · EU Narrative Observatory — Sophie</div>
+          <p class="story-source-quote">"Explore the potential of data collections for disinformation detection. We are a consortium leading the European Narrative Observatory."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">coordinate analysts across six countries under a shared taxonomy</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">give each national analyst their own labeling queue while feeding one comparative cross-country dataset for the monthly report</div>
+        </div>
+        <p class="story-scenario">Sophie coordinates the European Narrative Observatory at PROMPT, a consortium of organizations across six EU member states each monitoring their national information environments using a shared taxonomy. She needs a single workspace where analysts from Germany, France, Poland, Romania, Spain, and the Netherlands can each label content from their own national contexts, feeding into one comparative dataset that powers the Observatory's monthly cross-country reports.<br><br>Sophie creates a shared Project called "ENO Narrative Taxonomy 2026" with a codebook all six national analysts helped develop. She creates Labelling Exercises for each country and assigns the relevant national analyst as the responsible coder. Each analyst monitors their country's channels, adds posts to their national queue, and labels using the shared codebook. Sophie reviews completed work and uses the time-series dashboard to compare narrative activity across countries. She exports the cross-country dataset via API into the Observatory's reporting database for the monthly publication.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Each analyst's weekly output is visible without individual check-ins</li>
+            <li>Time-series view reveals anti-EU sentiment spiking simultaneously in Poland and Romania but not France or Spain — a publishable finding</li>
+            <li>One API call exports the full dataset with country, analyst, narrative category, and date fields</li>
+            <li>Cross-country trend lines are generated inside the platform — no merging of six spreadsheets</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">OSINT FOR UKRAINE — Dmytro</div>
+          <p class="story-source-quote">"monitor social media networks on X as well as other platforms that relate to the actual or bot related discussions regarding atrocity crimes cases and how they are used to propagate disinformation narratives."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">build an evidence archive of atrocity denial narratives for legal accountability bodies</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">label posts by crime and narrative type and export fully-documented evidence packages that hold up in legal submissions</div>
+        </div>
+        <p class="story-scenario">Dmytro is an open-source investigator at OSINT FOR UKRAINE building evidence archives of social media content denying or justifying specific atrocity crimes — Bucha, Mariupol, Kramatorsk. He needs to collect denial and justification narratives in real time, organize them by crime and narrative type, and produce evidentiary packages that can be used in legal documentation and shared with international accountability partners.<br><br>Dmytro creates a Project called "Atrocity Denial Narratives" with a codebook organized by crime name — Bucha, Mariupol, Kramatorsk — and narrative type: denial, justification, blame transfer, victim dehumanization. Search Terms in Russian, Ukrainian, and English collect posts referencing these events with denial-adjacent language. Posts are labeled by his team through a Labelling Exercise. The most significant posts — high engagement, specific named accounts, coordinated timing — are added to a Post List called "Priority evidence — [month]" and exported with full metadata for submission to international legal bodies.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>A post labeled "Bucha — denial — victim dehumanization" appears in the Project's categorized export automatically</li>
+            <li>All posts labeled "Mariupol — justification" from a date range pull in a single filtered export for a legal submission</li>
+            <li>12 accounts using the same narrative within a 6-hour window is visible by comparing post timestamps across the List</li>
+            <li>Export includes post text, platform, timestamp, engagement metrics, and label for submission to legal accountability bodies</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 5. COUNTER-EXTREMISM ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-5" id="p5">
+    <div class="persona-header">
+      <div class="persona-number">5</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Counter-Extremism &amp; Hate Speech Monitoring</span>
+        <h2 class="persona-name">The Extremism Monitor</h2>
+        <p class="persona-tagline">"I need to catch fringe content before it migrates to mainstream audiences — and monitor hundreds of accounts at once."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">The Informant — Jake</div>
+          <p class="story-source-quote">"Identify and archive emerging narratives, memes, and cross-platform coordination among far-right networks…Track how extremist actors test and spread content through public channels to reach broader audiences."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">track how a fringe narrative migrates from Telegram to mainstream platforms</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">see content appear on Telegram before it surfaces on X — and document the migration path with timestamps as evidence</div>
+        </div>
+        <p class="story-scenario">Jake is an investigative journalist at The Informant who covers far-right extremism and needs to catch the moment a fringe narrative migrates from Telegram or niche forums into higher-reach mainstream platforms — the point at which a small movement idea becomes a mass-audience story. He also needs to identify which specific accounts are doing the cross-posting, as that is often central to his reporting.<br><br>Jake creates Lists of known far-right Telegram channels, their associated mainstream X accounts, and the YouTube channels they recommend. He creates Search Terms using the coded terminology, phrases, and memes his reporting has already identified as movement-specific. Each week he checks the Leaderboard filtered to his Lists to see what content is gaining traction. When a "great replacement" variant narrative starts spiking on Telegram, he creates a Post List tracking its migration: first Telegram, then X, then a mainstream commentator's YouTube video. He labels posts by movement affiliation and content type for use as evidence in a long-form investigation.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>A Telegram-originating narrative is detected before it appears on X — providing reporting lead time</li>
+            <li>Post List shows the full migration path across three platforms with timestamps documenting lag</li>
+            <li>One specific X account is identified as consistently the first to cross-post from a particular Telegram channel</li>
+            <li>80-post labeled evidence archive exported with platform, date, and engagement data for editorial review</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Diverting Hate — Rachel</div>
+          <p class="story-source-quote">"improve our ability to track emerging trends in the manosphere across multiple platforms and hundreds of misogynistic influencers, enhance our keyword database, track hateful content narratives"</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">monitor 300+ influencer accounts for trends I can't manually track</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">see what's actually trending across all accounts this week — and catch which ones are growing fast — without visiting any individual page</div>
+        </div>
+        <p class="story-scenario">Rachel is a researcher at Diverting Hate tracking misogynistic content across the manosphere — more than 300 influencer accounts across X, YouTube, TikTok, and Telegram. Her team studies which rhetorical patterns are gaining influence, which influencers are growing fastest, and how content migrates across communities. Manual scrolling of 300+ accounts is no longer possible; she needs a system that surfaces what's actually trending across all of them at once.<br><br>Rachel creates an Actor Set with all 320+ manosphere influencer accounts, organized into sub-Lists by community type: incel, MGTOW, red pill, tradcon. She uses Channel Intelligence to track which accounts have grown most in the last 30 days. She creates Search Terms for emerging keyword clusters — when new terminology appears in her research, she adds it immediately and watches it spread across the Actor Set. She uses the Leaderboard to surface the week's highest-engagement content and labels it by narrative type — "male victimhood," "anti-feminism," "relationship dominance," "political radicalization." Trend data is exported monthly for Diverting Hate's published reports.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Top 20 most-engaged posts across all 320 accounts surface this week without visiting any individual account</li>
+            <li>Three previously small accounts that doubled engagement in 30 days are flagged for deeper investigation</li>
+            <li>A new Search Term shows within 48 hours how many accounts are already using the emerging language</li>
+            <li>Monthly trend report showing narrative category volume over time exports for published research</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 6. CIVIL SOCIETY ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-6" id="p6">
+    <div class="persona-header">
+      <div class="persona-number">6</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Civil Society &amp; Advocacy Monitoring</span>
+        <h2 class="persona-name">The Advocacy Researcher</h2>
+        <p class="persona-tagline">"I need to monitor what's being said about us, what's spreading on opaque platforms, and build evidence strong enough for legal and policy use."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Stand with Trans — Alex</div>
+          <p class="story-source-quote">"Track misinformation and anti-trans rhetoric targeting our content and the trans community…Understand which of our messages resonate most effectively with different audiences."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">monitor hostile content about my community and measure our own messaging effectiveness simultaneously</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">run two parallel setups in one system — one defensive, one strategic — and brief leadership monthly from both</div>
+        </div>
+        <p class="story-scenario">Alex works at Stand with Trans and needs to do two things simultaneously: monitor anti-trans rhetoric and misinformation being directed at the trans community and their organization, and measure which of their own organization's messaging is actually resonating with their supporters. The first task is defensive — knowing what's being said about them. The second is strategic — understanding what works so they can communicate more effectively.<br><br>Alex creates two separate monitoring setups. For the defensive side, he creates Search Terms for Stand with Trans's name, common anti-trans slurs, and recurring misinformation claims about gender-affirming care, then sets a Monitoring view filtered to high-engagement content to surface what's spreading. For the strategic side, he adds Stand with Trans's own social accounts to an Actor Set and uses Channel Intelligence to compare engagement across their posts — identifying which message types generate the most shares and comments. Monthly he reviews both views to brief the communications team.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Every high-engagement post mentioning Stand with Trans or using anti-trans language surfaces in a single feed each morning</li>
+            <li>A specific false claim reaching 4,000 shares is detected in time for the comms team to prepare a response before it peaks</li>
+            <li>Story-based posts are shown to generate 3× more shares than statistics-based posts — a finding that shapes the next campaign</li>
+            <li>Six-month volume trend of hostile content targeting the organization is reportable to leadership</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Fossil Free Media — Miguel</div>
+          <p class="story-source-quote">"monitor disinformation narratives on video-based platforms like YouTube and TikTok that tend to be more opaque to easy monitoring by our small team"</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">monitor video platforms where my small team can't watch hours of content</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">see what's spreading on YouTube and TikTok ranked by reach — without watching a single video</div>
+        </div>
+        <p class="story-scenario">Miguel works at Fossil Free Media and his team is small — they can monitor X reasonably, but YouTube and TikTok are much harder because video content doesn't appear in any text feed and the algorithm-driven distribution means important narratives can go viral without surfacing anywhere they'd normally look. Miguel needs a way to see what's actually spreading on video platforms related to fossil fuel industry narratives, without his team having to watch hours of video.<br><br>Miguel creates Search Terms targeting fossil fuel industry talking points — specific phrases from industry campaigns, climate skepticism keywords, terms associated with known anti-climate lobbying narratives. He filters the Monitoring view to YouTube and TikTok only and sorts by engagement to surface the highest-reach content. When a TikTok account promoting natural gas as a "clean bridge fuel" hits 500,000 views, he creates a Post List called "Natural gas bridge narrative — Q2 2026" and labels posts by narrative type. He exports the list for Fossil Free Media's research publication and shares the dashboard with allied organizations.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Top 10 most-viewed fossil fuel industry narrative videos on YouTube and TikTok surface this week without watching any video</li>
+            <li>A 400% TikTok spike following a Congressional hearing is traceable to the specific accounts responsible</li>
+            <li>A labeled Post List of 50 video posts exports for a published report</li>
+            <li>Shareable dashboard goes to allied organizations without requiring partner login</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Center for International Environmental Law — Amara</div>
+          <p class="story-source-quote">"Furthering our research into corporate influence, misinformation, and lobbying. We are an organization sitting at the intersection of human rights and climate change."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">document coordinated corporate lobbying around key legislative moments</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">build a systematic, labeled evidence record rigorous enough to cite in legal submissions and peer-reviewed policy documents</div>
+        </div>
+        <p class="story-scenario">Amara is a researcher at CIEL studying how fossil fuel companies and their industry associations use social media to lobby against climate regulation and spread misinformation. She needs to build a documented, systematic record of corporate social media messaging — not just anecdotes — that is rigorous enough to cite in legal submissions and policy documents. Her evidence needs to demonstrate pattern, not just isolated examples.<br><br>Amara creates an Actor Set of social media accounts for 40 major fossil fuel companies, their trade associations, and affiliated think tanks. She creates Search Terms for regulatory opposition keywords — names of specific climate legislation, phrases from known industry lobbying campaigns. She monitors messaging volume around key regulatory moments using date filters. She runs a Labelling Exercise to classify posts by advocacy type: direct regulatory opposition, greenwashing, climate denial, "jobs at risk" framing. She exports the labeled dataset for legal submissions and publishes findings as a research report.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>All public posts from 40 tracked organizations in the 30-day window around a specific bill's introduction are collected</li>
+            <li>"Jobs at risk" framing increases 600% vs. the baseline month — a documentable and citable lobbying surge</li>
+            <li>Labeled dataset of 400 posts with organization, advocacy type, date, and engagement is citation-ready for legal submission</li>
+            <li>Partner dashboard shows six-month messaging volume trends without requiring partner login</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 7. ELECTION INTEGRITY ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-7" id="p7">
+    <div class="persona-header">
+      <div class="persona-number">7</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Election Integrity Monitoring</span>
+        <h2 class="persona-name">The Election Integrity Monitor</h2>
+        <p class="persona-tagline">"I need to catch voter suppression misinformation while it's still small — and document election-related narratives systematically."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">CivicTN — DeShawn</div>
+          <p class="story-source-quote">"monitoring public conversations related to voter registration, inactive voter status, election protection, redistricting, voting rights litigation, polling place information"</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">detect a false election claim spreading in local community groups</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">catch the claim within hours — early enough to issue a same-day rapid response before it suppresses voters</div>
+        </div>
+        <p class="story-scenario">DeShawn works at CivicTN and monitors election-related misinformation targeting Tennessee voters — false information about registration deadlines, polling place changes, voter ID requirements, and voter purges. During election season this kind of misinformation can directly suppress voting by causing people to show up at the wrong place or believe they're ineligible. He needs to catch these claims early enough to issue a rapid response the same day.<br><br>DeShawn creates Search Terms for Tennessee-specific election keywords — county names combined with "polling place," "voter registration deadline," "voter ID," "voter rolls." He filters the Monitoring view to community-focused Facebook groups and local X accounts where this misinformation most often circulates. When a false claim that a specific Memphis polling location has been moved starts spreading in a local Facebook community, DeShawn creates a Post List of every instance, confirms it's false through election officials, and posts counter-messaging within the same day while also alerting the officials.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>A false "polling place moved" claim in a Memphis Facebook group is detected within six hours of first appearing</li>
+            <li>All instances across Facebook and X surface in one Post List, organized by time and engagement</li>
+            <li>The claim has been shared 200 times before CivicTN responds — evidence that justifies immediate escalation to election officials</li>
+            <li>CivicTN's rapid response content is tracked for engagement via Channel Intelligence</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Tribunal Regional Eleitoral do Rio Grande do Sul — Carlos</div>
+          <p class="story-source-quote">"Gostaria de ter um painel que facilitasse identificar os principais temas em discussão nas mídias sociais…processo de preparação para as eleições 2026"</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">provide the court with weekly situational awareness on election conversation</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">identify the top election topics each week and show leadership a time-series chart of how specific rumors escalated</div>
+        </div>
+        <p class="story-scenario">Carlos works at the Regional Electoral Court of Rio Grande do Sul and needs a monitoring system to track which election-related topics are dominating social media conversation in the state ahead of the 2026 elections. His goal is situational awareness for the court — knowing what narratives, rumors, and false claims are circulating so the court can respond proactively with accurate information and, where necessary, flag content for platform enforcement.<br><br>Carlos creates Search Terms in Portuguese for Rio Grande do Sul municipal and state election terms — candidate names, party names, voting process keywords, and terms associated with election integrity rumors — "fraude eleitoral," "urna," "voto auditado." He builds a Monitoring dashboard filtered to Brazilian Portuguese content, sorted by engagement. Each week he generates a snapshot of the most-discussed topics for internal court briefings. When a rumor about voting machine tampering begins circulating, he creates a Post List documenting its spread and uses the time-series chart to show how quickly it escalated — evidence for the court's public communications team to respond.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Top five election topics in Rio Grande do Sul social media identified each week without manual searching</li>
+            <li>Time-series chart shows a specific rumor's trajectory — when it started, how fast it spread, and whether the court's response affected the trend</li>
+            <li>A voting machine fraud rumor reaching 20,000 posts within 72 hours is documented for escalated court action</li>
+            <li>Dashboard shared with the communications team without requiring them to access the monitoring system directly</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 8. EDUCATION ── -->
+  <div class="section-rule"></div>
+  <section class="persona persona-8" id="p8">
+    <div class="persona-header">
+      <div class="persona-number">8</div>
+      <div class="persona-title-block">
+        <span class="persona-role-tag">Journalism Education &amp; Training</span>
+        <h2 class="persona-name">The Journalism Educator</h2>
+        <p class="persona-tagline">"I need students and reporters to build a working monitoring setup in a two-hour session they can actually use the next day."</p>
+      </div>
+    </div>
+    <div class="stories">
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Hanuman Partners — Neha</div>
+          <p class="story-source-quote">"I want to use Junkipedia to teach students and reporters about the tool, so they can learn how to conduct media monitoring and track narratives / trends across various platforms."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">run a hands-on monitoring workshop for journalists with no technical background</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">have participants follow along in real time and leave with a saved setup they can open on their beat the next morning</div>
+        </div>
+        <p class="story-scenario">Neha is a media trainer at Hanuman Partners who runs workshops for journalists and journalism students across South and Southeast Asia on digital investigation and media monitoring. She needs a tool she can use as the practical centerpiece of her workshops — demonstrating setup, monitoring, and evidence-building live — and that participants with minimal technical backgrounds can replicate on their own devices during the session.<br><br>Neha builds a standardized workshop exercise around a live monitoring scenario relevant to each cohort's country context — for an Indian journalism school, she builds around monitoring political party accounts ahead of an upcoming state election. She demonstrates each step on a projected screen: creating an Actor Set, filtering the monitoring view, running a keyword search, building a Post List. Participants replicate each step as she goes. She leaves each cohort with a shared template they can adapt for their own beats by swapping the Actor Set and Search Terms.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>A participant with no prior experience creates a working Actor Set and Saved Search during the two-hour session</li>
+            <li>Neha demonstrates a live Post List being built with real posts — the central teaching moment of the workshop</li>
+            <li>Participants leave with a working Saved Search for their own beat usable the next day without Neha's help</li>
+            <li>The same workshop structure adapts to Indian elections, Philippine media, or Indonesian fact-checking by changing only the Actor Set and Search Terms</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-source">
+          <div class="story-source-org">Craig Newmark School of Journalism — Jordan</div>
+          <p class="story-source-quote">"For investigative work. I am journalist in a Masters program with a focus on investigative data journalism."</p>
+        </div>
+        <div class="story-trigger">
+          <div class="story-when">When I…</div>
+          <div class="story-goal">conduct thesis research requiring months of systematic social media data collection</div>
+        </div>
+        <div class="story-body">
+          <div class="story-want-label">I want to…</div>
+          <div class="story-desire">collect and export clean, Python-ready data over a four-month study window — without writing any code or managing scrapers</div>
+        </div>
+        <p class="story-scenario">Jordan is a Master's student in investigative data journalism at the Craig Newmark School working on a thesis project that requires systematic collection of social media data over several months. He needs a platform that lets him monitor a defined set of accounts and keywords without knowing enough coding to build his own scraper, and that exports data in formats he can analyze in Python and visualize in Datawrapper.<br><br>Jordan creates an Actor Set of accounts and Search Terms relevant to his thesis topic and monitors them over a four-month research window. He uses the time-series chart to understand data patterns before exporting. When he's ready for analysis, he exports a CSV of all posts from the study period. He uses the Breakdown chart to understand which platforms produce what share of the content — helping him frame his thesis methodology accurately. He builds a Post List of the most significant posts for use as narrative case studies in the thesis itself.</p>
+        <div class="story-criteria-wrap">
+          <div class="story-criteria-label">Success criteria</div>
+          <ol class="story-criteria">
+            <li>Four months of social media data collected from a defined set of accounts and keywords without writing code</li>
+            <li>CSV export is directly parsable by Python — no manual cleaning required</li>
+            <li>In-platform charts provide citable methodology figures (platform distribution, time-series) for the thesis</li>
+            <li>A Post List of 15 illustrative case study posts with full metadata is built without manually copying posts one by one</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <span>Junkipedia — User Needs Research &nbsp;·&nbsp; June 2026</span>
+    <span>8 user categories &nbsp;·&nbsp; 25 profiled users &nbsp;·&nbsp; 20 user stories</span>
+  </div>
+</footer>
+
+
+  <script>
+    document.fonts.ready.then(function() {
+      setTimeout(function() { window.print(); }, 500);
+    });
+  </script>
+
+</body>
+</html>
