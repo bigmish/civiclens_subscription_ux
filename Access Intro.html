@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Three Flow Variants for Subscription — Civic Lens</title>
+<title>Three Flow Variants for Access — Civic Lens</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -122,6 +122,15 @@
   }
   .flow + .flow { border-top: 1px solid #f0f0f0; padding-top: 40px; }
 
+  /* Inline text link */
+  .text-link {
+    color: #111;
+    text-decoration: underline;
+    text-decoration-color: #ccc;
+    text-underline-offset: 2px;
+  }
+  .text-link:hover { text-decoration-color: #111; }
+
   /* Footer note */
   .footnote {
     margin-top: 64px;
@@ -136,36 +145,22 @@
 <script src="auth.js"></script>
 <div class="page">
 
-  <h1>Three Flow Variants for Subscription</h1>
+  <h1>Three Flow Variants for Access</h1>
 
-  <p class="decision">Decision needed: which subscription flow do we ship?</p>
+  <p class="decision">Decision needed: which access flow do we ship?</p>
 
-  <p>We've built three working prototypes, each representing a different philosophy for how a new user moves from first click to active trial. The task now is to align on one. Walk through each prototype, discuss the tradeoffs, and pick a direction. If none of these feel quite right, the goal shifts: identify specifically what's missing and we'll build a fourth variant that addresses it.</p>
+  <p>These flows all build off of <a class="text-link" href="subscription_intro.html#flow-c">Flow C of the subscription flows</a>. They illustrate different ways to handle the request for access.</p>
 
-  <h2>The three flow variants</h2>
+  <h2>The access flow variants</h2>
 
   <div class="flow">
     <div class="flow-label">Flow A</div>
-    <h3>Pay for a subscription or get the free plan</h3>
-    <p>The user is presented with all subscription options up front. They can either subscribe directly or start a free 14-day trial of any plan — the choice is theirs. The "free for 14 days" offer is made explicit above the plan table, so both paths are visible from the start. This gives users full information before committing and positions the free trial as a deliberate opt-in rather than a default.</p>
-    <a class="flow-link" href="Prototype A.html">View Prototype A</a>
+    <h3>[Flow name — describe the access approach]</h3>
+    <p>[Describe how this flow handles the request for access, and how it differs from the other variants.]</p>
+    <a class="flow-link" href="Access Prototype A.html">View Access Prototype A</a>
   </div>
 
-  <div class="flow">
-    <div class="flow-label">Flow B</div>
-    <h3>All plans start free</h3>
-    <p>A small but meaningful reframe from Flow A: rather than separating "free trial" as a distinct concept, every plan simply starts free for 14 days. The user still chooses a plan upfront, but the framing removes the friction of "am I committing?" The implicit message is that choosing a plan is low-stakes, because nothing is charged until the trial ends. At renewal time, they can change their plan if they want something different.</p>
-    <a class="flow-link" href="Prototype B.html">View Prototype B</a>
-  </div>
-
-  <div class="flow">
-    <div class="flow-label">Flow C</div>
-    <h3 data-comment-anchor="39a32140d7-h3">Try it first, decide later <span class="rec-badge">Recommended</span></h3>
-    <p>A more radical departure. The user isn't asked to engage with subscriptions at all when they sign up — they simply log in and get access. Behind the scenes they're on an Advanced-level trial, but the interface doesn't surface that detail. They get 14 days of full access, and the subscription conversation only happens when it's time to pay. This is a common pattern for B2B SaaS products where the goal is to get users to the value of the product as quickly as possible, with minimal cognitive overhead at the door.</p>
-    <a class="flow-link" href="Prototype C.html">View Prototype C</a>
-  </div>
-
-  <p class="footnote">Civic Lens subscription flow explorations · June 2026</p>
+  <p class="footnote">Civic Lens access flow explorations · June 2026</p>
 
 </div>
 </body>

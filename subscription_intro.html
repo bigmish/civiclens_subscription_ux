@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Three Flow Variants for Subscription — Civic Lens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'Hind', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 32px 120px;
+  }
+
+  /* Header */
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #111;
+    margin: 0 0 28px;
+  }
+
+  /* Decision subheader */
+  .decision {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 0 0 8px;
+  }
+
+  /* Body text */
+  p {
+    margin: 0 0 24px;
+    color: #333;
+    text-wrap: pretty;
+  }
+
+  /* Section header */
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin: 56px 0 32px;
+    padding-top: 48px;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  /* Flow entries */
+  .flow { margin-bottom: 48px; }
+
+  .flow-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 4px;
+  }
+
+  .flow h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin: 0 0 12px;
+  }
+
+  .flow p {
+    margin: 0 0 16px;
+    color: #444;
+  }
+
+  .flow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1.5px solid #ddd;
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+    white-space: nowrap;
+  }
+  .flow-link:hover { border-color: #111; }
+  .flow-link::after { content: '→'; font-size: 13px; }
+
+  .flow h3 .rec-badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #1a1a1a;
+    border-radius: 4px;
+    padding: 2px 7px;
+    position: relative;
+    top: -2px;
+  }
+  .flow + .flow { border-top: 1px solid #f0f0f0; padding-top: 40px; }
+
+  /* Footer note */
+  .footnote {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid #e8e8e8;
+    font-size: 14px;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+<script src="auth.js"></script>
+<div class="page">
+
+  <h1>Three Flow Variants for Subscription</h1>
+
+  <p class="decision">Decision needed: which subscription flow do we ship?</p>
+
+  <p>We've built three working prototypes, each representing a different philosophy for how a new user moves from first click to active trial. The task now is to align on one. Walk through each prototype, discuss the tradeoffs, and pick a direction. If none of these feel quite right, the goal shifts: identify specifically what's missing and we'll build a fourth variant that addresses it.</p>
+
+  <h2>The three flow variants</h2>
+
+  <div class="flow">
+    <div class="flow-label">Flow A</div>
+    <h3>Pay for a subscription or get the free plan</h3>
+    <p>The user is presented with all subscription options up front. They can either subscribe directly or start a free 14-day trial of any plan — the choice is theirs. The "free for 14 days" offer is made explicit above the plan table, so both paths are visible from the start. This gives users full information before committing and positions the free trial as a deliberate opt-in rather than a default.</p>
+    <a class="flow-link" href="Subscription Prototype A.html">View Subscription Prototype A</a>
+  </div>
+
+  <div class="flow">
+    <div class="flow-label">Flow B</div>
+    <h3>All plans start free</h3>
+    <p>A small but meaningful reframe from Flow A: rather than separating "free trial" as a distinct concept, every plan simply starts free for 14 days. The user still chooses a plan upfront, but the framing removes the friction of "am I committing?" The implicit message is that choosing a plan is low-stakes, because nothing is charged until the trial ends. At renewal time, they can change their plan if they want something different.</p>
+    <a class="flow-link" href="Subscription Prototype B.html">View Subscription Prototype B</a>
+  </div>
+
+  <div class="flow" id="flow-c">
+    <div class="flow-label">Flow C</div>
+    <h3 data-comment-anchor="39a32140d7-h3">Try it first, decide later <span class="rec-badge">Recommended</span></h3>
+    <p>A more radical departure. The user isn't asked to engage with subscriptions at all when they sign up — they simply log in and get access. Behind the scenes they're on an Advanced-level trial, but the interface doesn't surface that detail. They get 14 days of full access, and the subscription conversation only happens when it's time to pay. This is a common pattern for B2B SaaS products where the goal is to get users to the value of the product as quickly as possible, with minimal cognitive overhead at the door.</p>
+    <a class="flow-link" href="Subscription Prototype C.html">View Subscription Prototype C</a>
+  </div>
+
+  <p class="footnote">Civic Lens subscription flow explorations · June 2026</p>
+
+</div>
+</body>
+</html>
